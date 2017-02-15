@@ -1,6 +1,5 @@
-export { default as Header } from './components/Header';
-export { default as MainSection } from './components/MainSection';
-export { default as ResourceItem } from './components/ResourceItem';
+export { default as LeftNav } from './components/LeftNav';
+export { default as TeamName } from './components/TeamName';
 export { default as TextInput } from './components/TextInput';
 export * from './actions';
 import * as model from './model';

@@ -34,6 +34,9 @@ module.exports = function(options) {
     "ts|tsx": {
       loaders: ['react-hot', 'ts-loader']
     },
+    "eot|svg|ttf|woff|woff2": {
+      loaders: ["file-loader"]
+    },
     "scss": {
       loaders: ["style-loader", "css-loader", "sass-loader"]
     }

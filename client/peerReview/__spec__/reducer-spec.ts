@@ -3,20 +3,20 @@
 import { expect } from 'chai';
 
 import reducer from '../reducer';
-import { Resource } from '../model';
+import { Team } from '../model';
 
 import {
-  ADD_RESOURCE,
-  DELETE_RESOURCE,
-  EDIT_RESOURCE
+  ADD_TEAM,
+  DELETE_TEAM,
+  EDIT_TEAM
 } from '../actions';
 
 describe('reducer', () => {
   it('handles add', () => {
-    let state: Resource[] = [{ id: 0, text: ''}];
+    let state: Team[] = [{ id: 0, text: ''}];
 
     state = reducer(state, {
-      type: ADD_RESOURCE,
+      type: ADD_TEAM,
       payload: { text: 'hello'}
     });
 
@@ -26,22 +26,22 @@ describe('reducer', () => {
   });
 
   it('handles delete', () => {
-    let state: Resource[] = [{ id: 1, text: ''}];
+    let state: Team[] = [{ id: 1, text: ''}];
 
     state = reducer(state, {
-      type: DELETE_RESOURCE,
-      payload: { id: 1 } as Resource
+      type: DELETE_TEAM,
+      payload: { id: 1 } as Team
     });
 
     expect(state).to.eql([]);
   });
 
   it('handles edit', () => {
-    let state: Resource[] = [{ id: 1, text: '' }];
+    let state: Team[] = [{ id: 1, text: '' }];
 
     state = reducer(state, {
-      type: EDIT_RESOURCE,
-      payload: { id: 1, text: 'hello' } as Resource
+      type: EDIT_TEAM,
+      payload: { id: 1, text: 'hello' } as Team
     });
 
     expect(state[0]).to.eql(

@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 
-import resources from '../resources';
+import teams from '../peerReview';
 
 const rootReducer = combineReducers({
-  resources 
+  teams 
 });
 
 export default rootReducer;

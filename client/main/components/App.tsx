@@ -3,37 +3,36 @@ import { connect } from 'react-redux';
 import * as React from 'react';
 
 import {
-  Header,
-  MainSection,
+  LeftNav,
   model,
-  addResource,
-  editResource,
-  deleteResource
-} from '../../resources';
+  addTeam,
+  editTeam,
+  deleteTeam
+} from '../../peerReview';
 
 interface AppProps {
-  resources: model.Resource[];
+  teams: model.Team[];
   dispatch: Dispatch<{}>;
 }
 
 class App extends React.Component<AppProps, void> {
   render() {
-    const { resources, dispatch } = this.props;
-
+    const { teams, dispatch } = this.props;
+    
     return (
       <div>
-        <Header addResource={(text: string) => dispatch(addResource(text))} />
-        <MainSection
-            resources={resources}
-            editResource={(t,s) => dispatch(editResource(t, s))}
-            deleteResource={(t: model.Resource) => dispatch(deleteResource(t))}/>
+        <LeftNav 
+          addTeam={(text: string) => dispatch(addTeam(text))}
+          teams={teams}
+          editTeam={(t,s) => dispatch(editTeam(t, s))}
+          deleteTeam={(t: model.Team) => dispatch(deleteTeam(t))}/>
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  resources: state.resources
+  teams: state.teams
 });
 
 export default connect(mapStateToProps)(App);

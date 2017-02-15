@@ -6,7 +6,7 @@ interface TextInputProps {
   text?: string;
   placeholder?: string,
   editing?: boolean;
-  newResource?: boolean;
+  newTeam?: boolean;
 };
 
 interface TextInputState {
@@ -25,7 +25,7 @@ class TextInput extends React.Component<TextInputProps, TextInputState> {
     const text = e.target.value.trim();
     if (e.which === 13) {
       this.props.onSave(text);
-      if (this.props.newResource) {
+      if (this.props.newTeam) {
         this.setState({ text: '' });
       }
     }
@@ -36,7 +36,7 @@ class TextInput extends React.Component<TextInputProps, TextInputState> {
   }
 
   handleBlur(e) {
-    if (!this.props.newResource) {
+    if (!this.props.newTeam) {
       this.props.onSave(e.target.value);
     }
   }
@@ -46,7 +46,7 @@ class TextInput extends React.Component<TextInputProps, TextInputState> {
       <input className={
         classNames({
           edit: this.props.editing,
-          'new-resource': this.props.newResource
+          'new-team': this.props.newTeam
         })}
         type="text"
         placeholder={this.props.placeholder}
