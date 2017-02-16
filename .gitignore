@@ -6,3 +6,4 @@ build/stats-dev.json*
 tmp/
 dist/
 .sw[a-z]
+.env

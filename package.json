@@ -17,16 +17,21 @@
   "author": "Roberto Ortega <berto.ort@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.16.1",
     "classnames": "2.2.3",
     "concurrently": "2.0.0",
+    "dotenv": "^4.0.0",
     "express": "4.13.3",
     "extract-text-webpack-plugin": "0.9.1",
+    "knex": "^0.12.6",
     "lodash": "4.0.0",
+    "pg": "^6.1.2",
     "react": "0.14.7",
     "react-dom": "0.14.7",
     "react-redux": "4.4.0",
     "redux": "3.6.0",
     "redux-actions": "0.8.0",
+    "uuid-v4": "^0.1.0",
     "yargs": "3.29.0"
   },
   "devDependencies": {
