@@ -3,31 +3,31 @@ import { handleActions, Action } from 'redux-actions';
 import { Team, IState } from '../main/model';
 
 import {
-  GET_TEAMS,
-  ADD_TEAM,
-  DELETE_TEAM,
-  EDIT_TEAM
+  GET_MEMBERS,
+  ADD_MEMBER,
+  DELETE_MEMBER,
+  EDIT_MEMBER
 } from './actions';
 
 export default handleActions<IState, Team>({
-  [GET_TEAMS]: (state: IState, action: Action<IState>): IState => {
+  [GET_MEMBERS]: (state: IState, action: Action<IState>): IState => {
     return action.payload;
   },
 
-  [ADD_TEAM]: (state: IState, action: Action<Team>): IState => {
+  [ADD_MEMBER]: (state: IState, action: Action<Team>): IState => {
     return [{
       id: action.payload.id,
       name: action.payload.name
     }, ...state];
   },
 
-  [DELETE_TEAM]: (state: IState, action: Action<Team>): IState => {
+  [DELETE_MEMBER]: (state: IState, action: Action<Team>): IState => {
     return state.filter(team => {
       return team.id !== action.payload.id
     });
   },
 
-  [EDIT_TEAM]: (state: IState, action: Action<Team>): IState => {
+  [EDIT_MEMBER]: (state: IState, action: Action<Team>): IState => {
     return <IState>state.map(team => {
       return team.id === action.payload.id
         ? assign(<Team>{}, team, { name: action.payload.name })

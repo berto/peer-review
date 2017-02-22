@@ -1,37 +1,19 @@
 import * as React from 'react';
 
-import { Team } from '../model';
+import { Team } from '../../main/model';
 import TeamName from './TeamName';
-import { SHOW_ALL } from '../constants/Filters';
-
-const FILTERS = {
-  [SHOW_ALL]: () => true,
-};
-
 interface MainSectionProps {
   teams: Team[];
   getTeams: ()=>void;
+  getMembers: (team:Team)=>void;
   editTeam: (team:Team, name:string)=>void;
   deleteTeam: (team:Team)=>void;
 };
 
-interface MainSectionState {
-  filter: string;
-};
-
-class MainSection extends React.Component<MainSectionProps, MainSectionState> {
-  constructor(props, context) {
-    super(props, context);
-    this.state = { filter: SHOW_ALL };
-  }
-
-  handleShow(filter) {
-    this.setState({ filter });
-  }
+class MainSection extends React.Component<MainSectionProps, void> {
 
   render() {
-    const { teams, deleteTeam, editTeam } = this.props;
-    const { filter } = this.state;
+    const { teams, deleteTeam, editTeam, getMembers } = this.props;
 
     return (
       <section className="pure-menu">
@@ -40,6 +22,7 @@ class MainSection extends React.Component<MainSectionProps, MainSectionState> {
             <TeamName
               key={team.id}
               team={team}
+              getMembers={getMembers}
               editTeam={editTeam}
               deleteTeam={deleteTeam}/>
           )}

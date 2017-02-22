@@ -1,8 +1,5 @@
-import { createAction, Action } from 'redux-actions';
-import { assign } from 'lodash';
-import { Team, IState } from './model';
+import { Team, IState } from '../main/model';
 import axios from 'axios';
-import uuid from 'uuid/v4';
 
 export const GET_TEAMS = 'GET_TEAMS';
 export const ADD_TEAM = 'ADD_TEAM';

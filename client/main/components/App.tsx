@@ -1,15 +1,14 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as React from 'react';
+import actions from '../action';
+import {Team, Member} from '../model';
 
-import {
-  LeftNav,
-  model,
-  actions
-} from '../../teams';
+import { LeftNav } from '../../teams';
 
 interface AppProps {
-  teams: model.Team[]
+  teams: Team[]
+  members: Member[]
   actions: any
 }
 
@@ -21,6 +20,7 @@ class App extends React.Component<AppProps, void> {
         <LeftNav 
           addTeam={actions.addTeam}
           teams={teams}
+          getMembers={actions.getMembers}
           getTeams={actions.getTeams}
           editTeam={actions.editTeam}
           deleteTeam={actions.deleteTeam}/>

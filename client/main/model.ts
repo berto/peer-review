@@ -3,4 +3,9 @@ export type Team = {
   name: string;
 };
 
+export type Member = {
+  id?: string;
+  name: string;
+};
+
 export type IState = Team[];
