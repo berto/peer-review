@@ -1,3 +1,0 @@
-export const ADD_RESOURCE = 'ADD_RESOURCE';
-export const DELETE_RESOURCE = 'DELETE_RESOURCE';
-export const EDIT_RESOURCE = 'EDIT_RESOURCE';

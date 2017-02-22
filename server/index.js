@@ -2,6 +2,8 @@ var path = require('path');
 var express = require('express');
 var http = require('http');
 var config = require('./config');
+var bodyParser = require('body-parser');
+var teams = require('./api/teams');
 
 module.exports = function(options) {
   var Renderer = require("../config/SimpleRenderer.js");
@@ -22,8 +24,12 @@ module.exports = function(options) {
   app.use("/_assets", express.static(path.join(__dirname, "..", "build", "public"), {
     maxAge: "200d" // We can cache them as they include hashes
   }));
-  app.use("/", express.static(path.join(__dirname, "..", "public"), {
-  }));
+  app.use("/", express.static(path.join(__dirname, "..", "public"), {}));
+
+  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({ extended: false }));
+
+  app.use('/api/teams', teams);
 
   app.get("/*", function(req, res) {
     renderer.render(

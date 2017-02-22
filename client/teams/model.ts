@@ -1,6 +1,6 @@
 export type Team = {
-  id?: number;
-  text: string;
+  id?: string;
+  name: string;
 };
 
 export type IState = Team[];
