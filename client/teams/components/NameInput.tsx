@@ -1,38 +1,38 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
 
-interface TextInputProps {
-  onSave: (text:string)=>void;
-  text?: string;
+interface NameInputProps {
+  onSave: (name:string)=>void;
+  name?: string;
   placeholder?: string,
   editing?: boolean;
   newTeam?: boolean;
 };
 
-interface TextInputState {
-  text: string;
+interface NameInputState {
+  name: string;
 }
 
-class TextInput extends React.Component<TextInputProps, TextInputState> {
+class NameInput extends React.Component<NameInputProps, NameInputState> {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      text: this.props.text || ''
+      name: this.props.name || ''
     };
   }
 
   handleSubmit(e) {
-    const text = e.target.value.trim();
+    const name = e.target.value.trim();
     if (e.which === 13) {
-      this.props.onSave(text);
+      this.props.onSave(name);
       if (this.props.newTeam) {
-        this.setState({ text: '' });
+        this.setState({ name: '' });
       }
     }
   }
 
   handleChange(e) {
-    this.setState({ text: e.target.value });
+    this.setState({ name: e.target.value });
   }
 
   handleBlur(e) {
@@ -51,7 +51,7 @@ class TextInput extends React.Component<TextInputProps, TextInputState> {
         type="text"
         placeholder={this.props.placeholder}
         autoFocus={true}
-        value={this.state.text}
+        value={this.state.name}
         onBlur={this.handleBlur.bind(this)}
         onChange={this.handleChange.bind(this)}
         onKeyDown={this.handleSubmit.bind(this)} />
@@ -60,4 +60,4 @@ class TextInput extends React.Component<TextInputProps, TextInputState> {
 }
 
 
-export default TextInput;
+export default NameInput;

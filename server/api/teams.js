@@ -16,7 +16,7 @@ router.get('/:id', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
   Team.create(req.body.name).then(function (id) {
-    res.json({success:true, id:id});
+    res.json({success:true, id: id[0]});
   });
 });
 

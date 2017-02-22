@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-import TextInput from './TextInput';
+import NameInput from './NameInput';
 
 interface HeaderProps {
-  addTeam: (text:string)=> any;
+  addTeam: (name:string)=> any;
 };
 
 interface HeaderSectionState {
@@ -11,14 +11,14 @@ interface HeaderSectionState {
 };
 
 class Header extends React.Component<HeaderProps, HeaderSectionState> {
-  constructor(props, context) {
-    super(props, context);
+  constructor(props, conname) {
+    super(props, conname);
     this.state = {addNew: false};
   }
 
-  handleSave(text: string) {
-    if (text.length !== 0) {
-      this.props.addTeam(text);
+  handleSave(name: string) {
+    if (name.length !== 0) {
+      this.props.addTeam(name);
     }
   }
 
@@ -30,7 +30,7 @@ class Header extends React.Component<HeaderProps, HeaderSectionState> {
     let element;
     if (this.state.addNew) {
       element = ( 
-        <TextInput
+        <NameInput
           newTeam
           onSave={this.handleSave.bind(this)}
           placeholder="New Team Name"

@@ -2,11 +2,11 @@ import * as React from 'react';
 import * as classNames from 'classnames';
 
 import { Team } from '../model';
-import TextInput from './TextInput';
+import NameInput from './NameInput';
 
 interface ItemProps {
   team: Team;
-  editTeam: (team:Team, text:string)=>void;
+  editTeam: (team:Team, name:string)=>void;
   deleteTeam: (team:Team)=>void;
   key?: any;
 };
@@ -16,8 +16,8 @@ interface ItemState {
 };
 
 class TeamItem extends React.Component<ItemProps, ItemState> {
-  constructor(props, context) {
-    super(props, context);
+  constructor(props, conname) {
+    super(props, conname);
     this.state = {
       editing: false
     };
@@ -27,11 +27,11 @@ class TeamItem extends React.Component<ItemProps, ItemState> {
     this.setState({ editing: true });
   }
 
-  handleSave(team:Team, text:string) {
-    if (text.length === 0) {
+  handleSave(team:Team, name:string) {
+    if (name.length === 0) {
       this.props.deleteTeam(team);
     } else {
-      this.props.editTeam(team, text);
+      this.props.editTeam(team, name);
     }
     this.setState({ editing: false });
   }
@@ -42,15 +42,15 @@ class TeamItem extends React.Component<ItemProps, ItemState> {
     let element;
     if (this.state.editing) {
       element = (
-        <TextInput text={team.text}
+        <NameInput name={team.name}
         editing={this.state.editing}
-        onSave={(text) => this.handleSave(team, text)}/>
+        onSave={(name) => this.handleSave(team, name)}/>
       );
     } else {
       element = (
         <div className="view">
           <label className="hand" onDoubleClick={this.handleDoubleClick.bind(this)}>
-            {team.text}
+            {team.name}
           </label>
           <i className="material-icons hide warning hand right" onClick={() => deleteTeam(team)} > delete </i>
         </div>

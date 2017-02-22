@@ -1,4 +1,4 @@
-var uuid = require('uuid-v4');
+var uuid = require('uuid/v4');
 
 exports.seed = function(knex, Promise) {
   // Deletes ALL existing entries

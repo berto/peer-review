@@ -1,9 +1,9 @@
 var knex = require('./../connection');
-var uuid = require('uuid-v4');
+var uuid = require('uuid/v4');
 
 module.exports = {
   list: function () {
-    return knex('team');
+    return knex('team').orderBy('created_at', 'desc');
   },
   read: function (id) {
     return knex('team').where({id: id}).first();
@@ -12,7 +12,7 @@ module.exports = {
     return knex('team').insert({
       id: uuid(),
       name: name
-    }).returning('id').first();
+    }).returning('id')
   },
   update: function (id, name) {
     return knex('team').update({name: name}).where({id: id});

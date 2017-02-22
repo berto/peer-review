@@ -1,31 +1,29 @@
-import { Dispatch } from 'redux';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as React from 'react';
 
 import {
   LeftNav,
   model,
-  addTeam,
-  editTeam,
-  deleteTeam
-} from '../../peerReview';
+  actions
+} from '../../teams';
 
 interface AppProps {
-  teams: model.Team[];
-  dispatch: Dispatch<{}>;
+  teams: model.Team[]
+  actions: any
 }
 
 class App extends React.Component<AppProps, void> {
   render() {
-    const { teams, dispatch } = this.props;
-    
+    const { actions, teams } = this.props;
     return (
       <div>
         <LeftNav 
-          addTeam={(text: string) => dispatch(addTeam(text))}
+          addTeam={actions.addTeam}
           teams={teams}
-          editTeam={(t,s) => dispatch(editTeam(t, s))}
-          deleteTeam={(t: model.Team) => dispatch(deleteTeam(t))}/>
+          getTeams={actions.getTeams}
+          editTeam={actions.editTeam}
+          deleteTeam={actions.deleteTeam}/>
       </div>
     );
   }
@@ -35,4 +33,8 @@ const mapStateToProps = state => ({
   teams: state.teams
 });
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators(actions, dispatch) 
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

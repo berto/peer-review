@@ -10,7 +10,8 @@ const FILTERS = {
 
 interface MainSectionProps {
   teams: Team[];
-  editTeam: (team:Team, text:string)=>void;
+  getTeams: ()=>void;
+  editTeam: (team:Team, name:string)=>void;
   deleteTeam: (team:Team)=>void;
 };
 
@@ -32,12 +33,10 @@ class MainSection extends React.Component<MainSectionProps, MainSectionState> {
     const { teams, deleteTeam, editTeam } = this.props;
     const { filter } = this.state;
 
-    const filteredTeams = teams.filter(FILTERS[filter]);
-
     return (
       <section className="pure-menu">
         <ul className="pure-menu-list">
-          {filteredTeams.map(team =>
+          {teams.map(team =>
             <TeamName
               key={team.id}
               team={team}
