@@ -19,7 +19,7 @@ class LeftNav extends React.Component<LeftNavProps, void> {
   }
   render() {
     return (
-      <section className="left-nav pure-u-1-4">
+      <section className="left-nav pure-u">
         <Header addTeam={this.props.addTeam} />
         <MainSection
           teams={this.props.teams}

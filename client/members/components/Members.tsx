@@ -23,7 +23,7 @@ class Members extends React.Component<MembersProps, void> {
       );
     }
     return (
-      <section className="member-list pure-u-1-4">
+      <section className="member-list pure-u">
         {element}
         <MainSection
           members={this.props.members}
