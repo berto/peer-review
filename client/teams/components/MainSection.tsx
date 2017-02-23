@@ -5,7 +5,7 @@ import TeamName from './TeamName';
 interface MainSectionProps {
   teams: Team[];
   getTeams: ()=>void;
-  getMembers: (team:Team)=>void;
+  getTeamMembers: (team:Team)=>void;
   editTeam: (team:Team, name:string)=>void;
   deleteTeam: (team:Team)=>void;
 };
@@ -13,7 +13,7 @@ interface MainSectionProps {
 class MainSection extends React.Component<MainSectionProps, void> {
 
   render() {
-    const { teams, deleteTeam, editTeam, getMembers } = this.props;
+    const { teams, deleteTeam, editTeam, getTeamMembers } = this.props;
 
     return (
       <section className="pure-menu">
@@ -22,7 +22,7 @@ class MainSection extends React.Component<MainSectionProps, void> {
             <TeamName
               key={team.id}
               team={team}
-              getMembers={getMembers}
+              getTeamMembers={getTeamMembers}
               editTeam={editTeam}
               deleteTeam={deleteTeam}/>
           )}

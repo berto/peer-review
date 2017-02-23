@@ -1,13 +1,12 @@
 import * as React from 'react';
 import * as classNames from 'classnames'; 
-import { Team } from '../../main/model';
+import { Member } from '../../main/model';
 import NameInput from './NameInput';
 
 interface NameProps {
-  team: Team;
-  getTeamMembers: (team:Team)=>void;
-  editTeam: (team:Team, name:string)=>void;
-  deleteTeam: (team:Team)=>void;
+  member: Member;
+  editMember: (member:Member, name:string)=>void;
+  deleteMember: (member:Member)=>void;
   key?: any;
 };
 
@@ -15,7 +14,7 @@ interface NameState {
   editing: boolean;
 };
 
-class TeamName extends React.Component<NameProps, NameState> {
+class MemberName extends React.Component<NameProps, NameState> {
   constructor(props, conname) {
     super(props, conname);
     this.state = {
@@ -27,39 +26,38 @@ class TeamName extends React.Component<NameProps, NameState> {
     this.setState({ editing: true });
   }
 
-  handleSave(team:Team, name:string) {
+  handleSave(member:Member, name:string) {
     if (name.length === 0) {
-      this.props.deleteTeam(team);
+      this.props.deleteMember(member);
     } else {
-      this.props.editTeam(team, name);
+      this.props.editMember(member, name);
     }
     this.setState({ editing: false });
   }
 
   render() {
-    const {team, deleteTeam, getTeamMembers} = this.props;
+    const {member, deleteMember} = this.props;
 
     let element;
     if (this.state.editing) {
       element = (
-        <NameInput name={team.name}
+        <NameInput name={member.name}
         editing={this.state.editing}
-        onSave={(name) => this.handleSave(team, name)}/>
+        onSave={(name) => this.handleSave(member, name)}/>
       );
     } else {
       element = (
         <div className="view">
           <label className="hand" >
-            {team.name}
+            {member.name}
           </label>
-          <i className="material-icons hide warning right" onClick={() => deleteTeam(team)} > delete </i>
+          <i className="material-icons hide warning right" onClick={() => deleteMember(member)} > delete </i>
         </div>
       );
     }
 
     return (
       <li onDoubleClick={this.handleDoubleClick.bind(this)}
-          onClick={() => getTeamMembers(team)}
           className={classNames({ editing: this.state.editing }, 
             "pure-menu-form", "pure-menu-link", "pure-form", "hand")}>
         {element}
@@ -68,4 +66,4 @@ class TeamName extends React.Component<NameProps, NameState> {
   }
 }
 
-export default TeamName;
+export default MemberName;

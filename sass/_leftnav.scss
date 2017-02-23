@@ -1,28 +1,3 @@
-.pure-menu-link {
-  border-left: 1em $dark-blue solid;
-  &:hover {
-    background: $blue;
-    .hide {
-      display: inline;
-    }
-  }
-}
-
-.pure-menu {
-  height: 80%;
-  overflow: scroll;
-}
-
-.button-secondary {
-  color: white;
-  border-radius: 4px;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-}
-
-.button-secondary {
-  background: $light-blue; 
-}
-
 .left-nav {
   background: $dark-blue;
   color: white;
@@ -32,9 +7,18 @@
   }
   header {
     margin: 1em;
-    button {
-      margin-bottom: 1em; 
+  }
+  .pure-menu {
+    height: 60%;
+    overflow: scroll;
+  }
+  .pure-menu-link {
+    border-left: 1em $dark-blue solid;
+    &:hover {
+      background: $blue;
+      .hide {
+        display: inline;
+      }
     }
   }
 }
-

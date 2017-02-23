@@ -1,0 +1,17 @@
+.pure-button {
+  border-radius: 20px;
+} 
+
+.button-primary {
+  background: #fff;
+  border: 1px solid #ddd;
+  color: #666;
+  padding: 0.5em 2em;
+  font-size: 80%;
+}
+
+.button-secondary {
+  color: white;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  background: $light-blue; 
+}

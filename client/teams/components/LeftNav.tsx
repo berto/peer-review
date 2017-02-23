@@ -7,7 +7,7 @@ import MainSection from './MainSection';
 interface LeftNavProps {
   teams: Team[];
   addTeam: (text:string)=> void;
-  getMembers: (team:Team)=>void;
+  getTeamMembers: (team:Team)=>void;
   getTeams: () => void;
   editTeam: (team:Team, text:string)=>void;
   deleteTeam: (team:Team)=> void;
@@ -23,7 +23,7 @@ class LeftNav extends React.Component<LeftNavProps, void> {
         <Header addTeam={this.props.addTeam} />
         <MainSection
           teams={this.props.teams}
-          getMembers={this.props.getMembers}
+          getTeamMembers={this.props.getTeamMembers}
           getTeams={this.props.getTeams}
           editTeam={this.props.editTeam}
           deleteTeam={this.props.deleteTeam}/>

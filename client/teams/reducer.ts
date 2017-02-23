@@ -1,6 +1,6 @@
 import { assign } from 'lodash';
 import { handleActions, Action } from 'redux-actions';
-import { Team, IState } from '../main/model';
+import { Team, Teams, State } from '../main/model';
 
 import {
   GET_TEAMS,
@@ -9,29 +9,31 @@ import {
   EDIT_TEAM
 } from './actions';
 
-export default handleActions<IState, Team>({
-  [GET_TEAMS]: (state: IState, action: Action<IState>): IState => {
-    return action.payload;
+const initialState: State = {teams: [], members: {list: [], team: null}};
+
+export default handleActions<State, Teams>({
+  [GET_TEAMS]: (state: State, action: Action<Teams>): Teams => {
+    return action.payload
   },
 
-  [ADD_TEAM]: (state: IState, action: Action<Team>): IState => {
+  [ADD_TEAM]: (state: Teams, action: Action<Team>): Teams => {
     return [{
-      id: action.payload.id,
-      name: action.payload.name
-    }, ...state];
+        id: action.payload.id,
+        name: action.payload.name
+      }, ...state]
   },
 
-  [DELETE_TEAM]: (state: IState, action: Action<Team>): IState => {
+  [DELETE_TEAM]: (state: Teams, action: Action<Team>): Teams => {
     return state.filter(team => {
       return team.id !== action.payload.id
     });
   },
 
-  [EDIT_TEAM]: (state: IState, action: Action<Team>): IState => {
-    return <IState>state.map(team => {
+  [EDIT_TEAM]: (state: Teams, action: Action<Team>): Teams => {
+    return <Teams>state.map(team => {
       return team.id === action.payload.id
         ? assign(<Team>{}, team, { name: action.payload.name })
         : team
     });
   },
-}, []);
+}, initialState);

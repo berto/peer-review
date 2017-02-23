@@ -1,37 +1,44 @@
 import { assign } from 'lodash';
 import { handleActions, Action } from 'redux-actions';
-import { Team, IState } from '../main/model';
+import { Member, Members, State } from '../main/model';
 
 import {
-  GET_MEMBERS,
+  GET_TEAM_MEMBERS,
   ADD_MEMBER,
   DELETE_MEMBER,
   EDIT_MEMBER
 } from './actions';
 
-export default handleActions<IState, Team>({
-  [GET_MEMBERS]: (state: IState, action: Action<IState>): IState => {
-    return action.payload;
+const initialState: State = {teams: [], members: {list: [], team: null}};
+
+export default handleActions<State, Member>({
+  [GET_TEAM_MEMBERS]: (state: Members, action: Action<any>): Members => {
+    return {team: action.payload.team, list: action.payload.members};
   },
 
-  [ADD_MEMBER]: (state: IState, action: Action<Team>): IState => {
-    return [{
-      id: action.payload.id,
-      name: action.payload.name
-    }, ...state];
+  [ADD_MEMBER]: (state: Members, action: Action<Member>): Members => {
+    return {
+      list: [{
+        id: action.payload.id,
+        name: action.payload.name
+      }, ...state.list],
+      team: state.team
+    };
   },
 
-  [DELETE_MEMBER]: (state: IState, action: Action<Team>): IState => {
-    return state.filter(team => {
-      return team.id !== action.payload.id
+  [DELETE_MEMBER]: (state: Members, action: Action<Member>): Members => {
+    let members: Member[] = state.list.filter(member => {
+      return member.id !== action.payload.id
     });
+    return {list: members, team: state.team};
   },
 
-  [EDIT_MEMBER]: (state: IState, action: Action<Team>): IState => {
-    return <IState>state.map(team => {
-      return team.id === action.payload.id
-        ? assign(<Team>{}, team, { name: action.payload.name })
-        : team
+  [EDIT_MEMBER]: (state: Members, action: Action<Member>): Members => {
+    let members: Member[] =  <Member[]>state.list.map(member => {
+      return member.id === action.payload.id
+        ? assign(<Member>{}, member, { name: action.payload.name })
+        : member
     });
+    return {list: members, team: state.team};
   },
-}, []);
+}, initialState);

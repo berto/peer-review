@@ -8,4 +8,14 @@ export type Member = {
   name: string;
 };
 
-export type IState = Team[];
+export interface State {
+  teams: Team[];
+  members: Members;
+}
+
+export interface Members {
+  list: Member[];
+  team: Team;
+}
+
+export type Teams = Team[];

@@ -4,6 +4,7 @@ var http = require('http');
 var config = require('./config');
 var bodyParser = require('body-parser');
 var teams = require('./api/teams');
+var members = require('./api/members');
 
 module.exports = function(options) {
   var Renderer = require("../config/SimpleRenderer.js");
@@ -29,7 +30,8 @@ module.exports = function(options) {
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: false }));
 
-  app.use('/api/teams', teams);
+  app.use('/api/team', teams);
+  app.use('/api/member', members);
 
   app.get("/*", function(req, res) {
     renderer.render(

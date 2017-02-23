@@ -1,0 +1,22 @@
+.member-list {
+  border-right: 1px solid #ddd;
+  height: 100vh;
+  .header {
+    padding-left: 1em;
+    padding-bottom: 1em;
+    border-bottom: 1px solid #ddd;
+  }
+  .pure-menu {
+    height: 70%;
+    overflow: scroll;
+  }
+  .pure-menu-link {
+    border-bottom: 1px solid #ddd;
+    border-left: 6px solid transparent;
+    &:hover {
+      .hide {
+        display: inline;
+      }
+    }
+  }
+}

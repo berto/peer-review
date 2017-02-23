@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Team = require('../../db/queries/teams');
+var Member = require('../../db/queries/members');
 
 router.get('/', function(req, res, next) {
   Team.list().then(function (teams) {
@@ -14,8 +15,20 @@ router.get('/:id', function(req, res, next) {
   });
 });
 
+router.get('/:id/member', function(req, res, next) {
+  Member.teamList(req.params.id).then(function (team) {
+    res.json(team);
+  });
+});
+
 router.post('/', function(req, res, next) {
   Team.create(req.body.name).then(function (id) {
+    res.json({success:true, id: id[0]});
+  });
+});
+
+router.post('/:id/member', function(req, res, next) {
+  Member.create(req.params.id, req.body.name).then(function (id) {
     res.json({success:true, id: id[0]});
   });
 });

@@ -1,30 +1,30 @@
-import { Member, IState } from '../main/model';
+import { Team, Member } from '../main/model';
 import axios from 'axios';
 
-export const GET_MEMBERS = 'GET_MEMBERS';
 export const ADD_MEMBER = 'ADD_MEMBER';
+export const GET_TEAM_MEMBERS = 'GET_TEAM_MEMBERS';
 export const DELETE_MEMBER = 'DELETE_MEMBER';
 export const EDIT_MEMBER = 'EDIT_MEMBER';
 
-const getMembers = () => {
+const getTeamMembers = (team: Team) => {
   return dispatch => {
-    axios.get('/api/members/').then(result => {
-      dispatch({ type: GET_MEMBERS, payload: result.data})
+    axios.get(`/api/team/${team.id}/member/`).then(result => {
+      dispatch({ type: GET_TEAM_MEMBERS, payload: {team, members: result.data}})
     })
   }
 };
 
-const addMember = (name: string) => {
+const addMember = (team: Team, name: string) => {
   return dispatch => {
-    axios.post('/api/members/', {name}).then(result => {
-      dispatch({ type: ADD_MEMBER, payload: {name, id: result.data.id[0]}})
+    axios.post(`/api/team/${team.id}/member/`, {name}).then(result => {
+      dispatch({ type: ADD_MEMBER, payload: {name, id: result.data.id}})
     })
   }
 };
 
 const deleteMember = (member: Member) => {
   return dispatch => {
-    axios.delete(`/api/members/${member.id}`).then(result => {
+    axios.delete(`/api/member/${member.id}`).then(result => {
       let payload = {id: member.id, success: result.data.success };
       dispatch({ type: DELETE_MEMBER, payload })
     })
@@ -33,7 +33,7 @@ const deleteMember = (member: Member) => {
 
 const editMember = (member: Member, name: string) => {
   return dispatch => {
-    axios.put(`/api/members/${member.id}`, {name}).then(result => {
+    axios.put(`/api/member/${member.id}`, {name}).then(result => {
       let payload = {id: member.id, name, success: result.data.success };
       dispatch({ type: EDIT_MEMBER, payload })
     })
@@ -41,7 +41,7 @@ const editMember = (member: Member, name: string) => {
 };
 
 export const actions = {
-  getMembers,
+  getTeamMembers,
   addMember,
   deleteMember,
   editMember

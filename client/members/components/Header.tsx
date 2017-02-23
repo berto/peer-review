@@ -1,9 +1,11 @@
 import * as React from 'react';
 
 import NameInput from './NameInput';
+import { Team } from '../../main/model';
 
 interface HeaderProps {
-  addTeam: (name:string)=> any;
+  addMember: (team: Team, name:string)=> any;
+  team: Team;
 };
 
 interface HeaderSectionState {
@@ -18,11 +20,11 @@ class Header extends React.Component<HeaderProps, HeaderSectionState> {
 
   handleSave(name: string) {
     if (name.length !== 0) {
-      this.props.addTeam(name);
+      this.props.addMember(this.props.team, name);
     }
   }
 
-  toggleNewTeamForm() {
+  toggleNewMemberForm() {
     this.setState({ addNew: !this.state.addNew })
   }
 
@@ -31,19 +33,19 @@ class Header extends React.Component<HeaderProps, HeaderSectionState> {
     if (this.state.addNew) {
       element = ( 
         <NameInput
-          newTeam
+          newMember
           onSave={this.handleSave.bind(this)}
-          placeholder="New Team Name"
+          placeholder="New Member Name"
         />
       )
     }
     return (
       <header className="header pure-form pure-form-stacked">
-        <h1> Peer Review </h1>
+        <h1> {this.props.team.name} </h1>
         <button 
-          className="pure-button button-secondary"
-          onClick={this.toggleNewTeamForm.bind(this)} > 
-          Add New Team </button>
+          className="pure-button button-primary"
+          onClick={this.toggleNewMemberForm.bind(this)} > 
+          Add New Member </button>
         {element}
       </header>
     );
