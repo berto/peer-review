@@ -3,15 +3,30 @@
 } 
 
 .button-primary {
-  background: #fff;
-  border: 1px solid #ddd;
-  color: #666;
+  background: $white;
+  border: 1px solid $light-gray;
+  color: $light-black;
   padding: 0.5em 2em;
   font-size: 80%;
 }
 
 .button-secondary {
-  color: white;
+  color: $white;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   background: $light-blue; 
+}
+
+.button-warning {
+  margin-left: 0.5em;
+  color: $white;
+  padding: 0.5em 2em;
+  background: $red; 
+  font-size: 80%;
+}
+
+.button-secondary-warning {
+  margin-left: 0.5em;
+  color: $white;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  background: $red; 
 }

@@ -37,7 +37,7 @@ export default handleActions<State, Teams>({
     let list: Team[] = state.list.filter(team => {
       return team.id !== action.payload.id
     });
-    return {list, selected: state.selected};
+    return {list, selected: null};
   },
 
   [EDIT_TEAM]: (state: Teams, action: Action<Team>): Teams => {

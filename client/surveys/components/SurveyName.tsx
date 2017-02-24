@@ -14,18 +14,24 @@ interface NameProps {
 
 interface NameState {
   editing: boolean;
+  deleting: boolean;
 };
 
 class SurveyName extends React.Component<NameProps, NameState> {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      editing: false
+      editing: false,
+      deleting: false
     };
   }
 
   handleDoubleClick() {
-    this.setState({ editing: true });
+    this.setState({ editing: true, deleting: false });
+  }
+
+  toggleDelete() {
+    this.setState({ editing: false, deleting: !this.state.deleting });
   }
 
   handleSave(survey:Survey, name:string) {
@@ -34,7 +40,7 @@ class SurveyName extends React.Component<NameProps, NameState> {
     } else {
       this.props.editSurvey(survey, name);
     }
-    this.setState({ editing: false });
+    this.setState({ editing: true, deleting: false });
   }
 
   surveyRedirect() {
@@ -51,13 +57,21 @@ class SurveyName extends React.Component<NameProps, NameState> {
         editing={this.state.editing}
         onSave={(name) => this.handleSave(survey, name)}/>
       );
+    } else if (this.state.deleting) {
+      element = (
+        <div>
+          <p> Are you sure? </p>
+          <button onClick={this.toggleDelete.bind(this)} className="pure-button button-primary"> Cancel </button>
+          <button onClick={() => deleteSurvey(survey)} className="pure-button button-warning"> Delete </button>
+        </div>
+      )
     } else {
       element = (
         <div className="view">
           <label className="hand" >
             {survey.name}
           </label>
-          <i className="material-icons hide warning right" onClick={() => deleteSurvey(survey)} > delete </i>
+          <i className="material-icons hide warning right" onClick={this.toggleDelete.bind(this)} > delete </i>
           <i className="material-icons hide success right" onClick={this.surveyRedirect.bind(this)} > link </i>
         </div>
       );

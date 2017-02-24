@@ -39,7 +39,7 @@ export default handleActions<State, Survey>({
     let surveys: Survey[] = state.list.filter(survey => {
       return survey.id !== action.payload.id
     });
-    return {list: surveys, selected: state.selected};
+    return {list: surveys, selected: null};
   },
 
   [EDIT_SURVEY]: (state: Surveys, action: Action<Survey>): Surveys => {

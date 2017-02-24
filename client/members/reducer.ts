@@ -39,7 +39,7 @@ export default handleActions<State, Member>({
     let members: Member[] = state.list.filter(member => {
       return member.id !== action.payload.id
     });
-    return {list: members, selected: state.selected};
+    return {list: members, selected: null};
   },
 
   [EDIT_MEMBER]: (state: Members, action: Action<Member>): Members => {

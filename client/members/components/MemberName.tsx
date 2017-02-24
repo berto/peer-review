@@ -14,18 +14,24 @@ interface NameProps {
 
 interface NameState {
   editing: boolean;
+  deleting: boolean;
 };
 
 class MemberName extends React.Component<NameProps, NameState> {
   constructor(props, conname) {
     super(props, conname);
     this.state = {
-      editing: false
+      editing: false,
+      deleting: false
     };
   }
 
   handleDoubleClick() {
-    this.setState({ editing: true });
+    this.setState({ editing: true, deleting: false });
+  }
+
+  toggleDelete() {
+    this.setState({ editing: false, deleting: !this.state.deleting });
   }
 
   handleSave(member:Member, name:string) {
@@ -34,7 +40,7 @@ class MemberName extends React.Component<NameProps, NameState> {
     } else {
       this.props.editMember(member, name);
     }
-    this.setState({ editing: false });
+    this.setState({ editing: true, deleting: false });
   }
 
   render() {
@@ -47,13 +53,21 @@ class MemberName extends React.Component<NameProps, NameState> {
         editing={this.state.editing}
         onSave={(name) => this.handleSave(member, name)}/>
       );
+    } else if (this.state.deleting) {
+      element = (
+        <div>
+          <p> Are you sure? </p>
+          <button onClick={this.toggleDelete.bind(this)} className="pure-button button-primary"> Cancel </button>
+          <button onClick={() => deleteMember(member)} className="pure-button button-warning"> Delete </button>
+        </div>
+      )
     } else {
       element = (
         <div className="view">
           <label className="hand" >
             {member.name}
           </label>
-          <i className="material-icons hide warning right" onClick={() => deleteMember(member)} > delete </i>
+          <i className="material-icons hide warning right" onClick={this.toggleDelete.bind(this)}> delete </i>
         </div>
       );
     }

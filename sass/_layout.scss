@@ -12,11 +12,11 @@ h1 {
 }
 
 .warning:hover {
-  color: red;
+  color: $red;
 }
 
 .success:hover {
-  color: green;
+  color: $green;
 }
 
 .hide {
@@ -24,5 +24,5 @@ h1 {
 }
 
 .selected {
-  border-left: 6px solid #1b98f8;
+  border-left: 6px solid $light-blue;
 }
