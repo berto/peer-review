@@ -15,11 +15,13 @@ exports.seed = function(knex, Promise) {
     .then(function (data) {
       var feedback = []
       data.members.forEach((member, i) => {
-        var chance = new Chance();
-        // Inserts seed entries
-        feedback.push(knex('feedback').insert({id: uuid(), score: chance.integer({min: 0, max: 5}), feedback: chance.paragraph(), survey_id: data.surveys[i].id, member_id: member.id}))
-        feedback.push(knex('feedback').insert({id: uuid(), score: chance.integer({min: 0, max: 5}), feedback: chance.paragraph(), survey_id: data.surveys[i].id, member_id: member.id}))
-        feedback.push(knex('feedback').insert({id: uuid(), score: chance.integer({min: 0, max: 5}), feedback: chance.paragraph(), survey_id: data.surveys[i].id, member_id: member.id}))
+        data.surveys.forEach((survey, j) => {
+          var chance = new Chance();
+          // Inserts seed entries
+          feedback.push(knex('feedback').insert({id: uuid(), score: chance.integer({min: 0, max: 5}), feedback: chance.paragraph(), survey_id: data.surveys[j].id, member_id: member.id}))
+          feedback.push(knex('feedback').insert({id: uuid(), score: chance.integer({min: 0, max: 5}), feedback: chance.paragraph(), survey_id: data.surveys[j].id, member_id: member.id}))
+          feedback.push(knex('feedback').insert({id: uuid(), score: chance.integer({min: 0, max: 5}), feedback: chance.paragraph(), survey_id: data.surveys[j].id, member_id: member.id}))
+        });
       });
       return Promise.all(feedback);
     });

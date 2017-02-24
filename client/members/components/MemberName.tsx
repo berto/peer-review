@@ -1,13 +1,15 @@
 import * as React from 'react';
 import * as classNames from 'classnames'; 
-import { Member } from '../../main/model';
+import { Member, Survey } from '../../main/model';
 import NameInput from './NameInput';
 
 interface NameProps {
   member: Member;
+  survey: Survey;
   editMember: (member:Member, name:string)=>void;
   setMember: (member:Member)=>void;
   deleteMember: (member:Member)=>void;
+  getMemberFeedback: (member:Member, survey:Survey)=> void;
   selected: boolean;
   key?: any;
 };
@@ -30,6 +32,11 @@ class MemberName extends React.Component<NameProps, NameState> {
     this.setState({ editing: true, deleting: false });
   }
 
+  handleClick() {
+    this.props.setMember(this.props.member);
+    this.props.getMemberFeedback(this.props.survey, this.props.member);
+  }
+
   toggleDelete() {
     this.setState({ editing: false, deleting: !this.state.deleting });
   }
@@ -40,7 +47,7 @@ class MemberName extends React.Component<NameProps, NameState> {
     } else {
       this.props.editMember(member, name);
     }
-    this.setState({ editing: true, deleting: false });
+    this.setState({ editing: false, deleting: false });
   }
 
   render() {
@@ -73,7 +80,7 @@ class MemberName extends React.Component<NameProps, NameState> {
     }
 
     return (
-      <li onDoubleClick={this.handleDoubleClick.bind(this)} onClick={() => this.props.setMember(member)}
+      <li onDoubleClick={this.handleDoubleClick.bind(this)} onClick={this.handleClick.bind(this)}
           className={classNames({ editing: this.state.editing }, { selected: this.props.selected},  
             "pure-menu-form", "pure-menu-link", "pure-form", "hand")}>
         {element}

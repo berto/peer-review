@@ -1,17 +1,19 @@
 import * as React from 'react';
 
-import { Member, Team } from '../../main/model';
+import { Member, Survey, Team } from '../../main/model';
 import Header from './Header';
 import MainSection from './MainSection';
 
 interface MembersProps {
   members: Member[];
   member: Member;
+  survey: Survey;
   team: Team;
   addMember: (team:Team, text:string)=> void;
   setMember: (member:Member)=> void;
   editMember: (member:Member, text:string)=>void;
   deleteMember: (member:Member)=> void;
+  getMemberFeedback: (member:Member, survey:Survey)=> void;
 };
 
 class Members extends React.Component<MembersProps, void> {
@@ -24,8 +26,10 @@ class Members extends React.Component<MembersProps, void> {
         <MainSection
           members={this.props.members}
           member={this.props.member}
+          survey={this.props.survey}
           editMember={this.props.editMember}
           setMember={this.props.setMember}
+          getMemberFeedback={this.props.getMemberFeedback}
           deleteMember={this.props.deleteMember}/>
       </section>
     );

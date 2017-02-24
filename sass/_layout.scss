@@ -3,6 +3,12 @@ h1 {
   padding: 0.5em;
 }
 
+.app {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .hand:hover {
   cursor: pointer;
 }

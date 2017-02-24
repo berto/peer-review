@@ -1,13 +1,16 @@
 import * as React from 'react';
 import * as classNames from 'classnames'; 
-import { Survey } from '../../main/model';
+import { Survey, Member } from '../../main/model';
 import NameInput from './NameInput';
 
 interface NameProps {
   survey: Survey;
+  currentSurvey: Survey;
+  member: Member;
   setSurvey: (survey: Survey)=> void;
   editSurvey: (survey:Survey, name:string)=>void;
   deleteSurvey: (survey:Survey)=>void;
+  getMemberFeedback: (member:Member, survey:Survey)=> void;
   selected: boolean;
   key?: any;
 };
@@ -30,6 +33,17 @@ class SurveyName extends React.Component<NameProps, NameState> {
     this.setState({ editing: true, deleting: false });
   }
 
+  handleClick() {
+    let survey: Survey = this.props.survey;
+    if (this.props.currentSurvey && this.props.currentSurvey.id === this.props.survey.id) {
+      survey = null;
+    } 
+    this.props.setSurvey(survey);
+    if (this.props.member) {
+      this.props.getMemberFeedback(survey, this.props.member);
+    }
+  }
+
   toggleDelete() {
     this.setState({ editing: false, deleting: !this.state.deleting });
   }
@@ -40,7 +54,7 @@ class SurveyName extends React.Component<NameProps, NameState> {
     } else {
       this.props.editSurvey(survey, name);
     }
-    this.setState({ editing: true, deleting: false });
+    this.setState({ editing: false, deleting: false });
   }
 
   surveyRedirect() {
@@ -78,7 +92,7 @@ class SurveyName extends React.Component<NameProps, NameState> {
     }
 
     return (
-      <li onDoubleClick={this.handleDoubleClick.bind(this)} onClick={() => this.props.setSurvey(survey)}
+      <li onDoubleClick={this.handleDoubleClick.bind(this)} onClick={this.handleClick.bind(this)}
           className={classNames({ editing: this.state.editing }, { selected: this.props.selected},
             "pure-menu-form", "pure-menu-link", "pure-form", "hand")}>
         {element}

@@ -17,11 +17,17 @@ export interface State {
   teams: Teams;
   members: Members;
   surveys: Surveys;
+  feedback: Feedback;
 }
 
 export interface Members {
   list: Member[];
   selected: Member;
+}
+
+export interface Feedback {
+  rating: number;
+  text: string[];
 }
 
 export interface Surveys {

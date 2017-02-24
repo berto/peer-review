@@ -1,14 +1,24 @@
-.team {
-  display: inline-block;
+.feedback {
   height: 100vh;
   width: 100%;
-  & > header {
+  display: flex;
+  flex-direction: column;
+  header {
     height: 10%;
     min-height: 4em;
     padding-left: 1em;
     padding-bottom: 1em;
+    overflow: scroll;
     border-bottom: 1px solid #ddd;
     border-right: 1px solid #ddd;
     box-sizing: border-box;
+    h1 {
+      padding-left: 0;
+    }
+  }
+  main {
+    padding-left: 0.5em;
+    height: 90%;
+    overflow: scroll;
   }
 }

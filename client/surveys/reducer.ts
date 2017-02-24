@@ -13,7 +13,8 @@ import {
 const initialState: State = {
   teams: {list: [], selected: null}, 
   surveys: {list: [], selected: null},
-  members: {list: [], selected: null}
+  members: {list: [], selected: null},
+  feedback: {text: [], rating: 0}
 };
 
 export default handleActions<State, Survey>({
