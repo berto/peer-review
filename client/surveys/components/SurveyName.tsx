@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as classNames from 'classnames'; 
 import { Survey, Member } from '../../main/model';
 import NameInput from './NameInput';
+import { Link } from 'react-router'
 
 interface NameProps {
   survey: Survey;
@@ -57,10 +58,6 @@ class SurveyName extends React.Component<NameProps, NameState> {
     this.setState({ editing: false, deleting: false });
   }
 
-  surveyRedirect() {
-    window.location.href = `survey/${this.props.survey.id}`;
-  }
-
   render() {
     const {survey, deleteSurvey} = this.props;
 
@@ -80,13 +77,14 @@ class SurveyName extends React.Component<NameProps, NameState> {
         </div>
       )
     } else {
+      let url: string = `/survey/${survey.id}`;
       element = (
         <div className="view">
           <label className="hand" >
             {survey.name}
           </label>
           <i className="material-icons hide warning right" onClick={this.toggleDelete.bind(this)} > delete </i>
-          <i className="material-icons hide success right" onClick={this.surveyRedirect.bind(this)} > link </i>
+          <Link to={url}><i className="material-icons hide success right" > link </i></Link>
         </div>
       );
     }
