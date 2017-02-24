@@ -65,8 +65,8 @@ class TeamName extends React.Component<NameProps, NameState> {
       element = (
         <div>
           <p> Are you sure? </p>
-          <button onClick={this.toggleDelete.bind(this)} className="pure-button button-primary"> Cancel </button>
-          <button onClick={() => deleteTeam(team)} className="pure-button button-warning"> Delete </button>
+          <button onClick={this.toggleDelete.bind(this)} className="pure-button button-secondary"> Cancel </button>
+          <button onClick={() => deleteTeam(team)} className="pure-button button-secondary-warning"> Delete </button>
         </div>
       )
     } else {

@@ -41,7 +41,7 @@ class Header extends React.Component<HeaderProps, HeaderSectionState> {
     }
     return (
       <header className="pure-form pure-form-stacked">
-        <h1> Members </h1>
+        <h2> Members </h2>
         <button 
           className="pure-button button-primary"
           onClick={this.toggleNewMemberForm.bind(this)} > 

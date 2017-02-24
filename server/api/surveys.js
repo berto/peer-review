@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Survey = require('../../db/queries/surveys');
+var Feedback = require('../../db/queries/feedbacks');
 
 router.get('/', function(req, res, next) {
   Survey.list().then(function (surveys) {
@@ -11,6 +12,12 @@ router.get('/', function(req, res, next) {
 router.get('/:id', function(req, res, next) {
   Survey.read(req.params.id).then(function (survey) {
     res.json(survey);
+  });
+});
+
+router.get('/:id/member/:member_id/feedback', function(req, res, next) {
+  Feedback.surveyRead(req.params.id, req.params.member_id).then(function (feedback) {
+    res.json(feedback);
   });
 });
 

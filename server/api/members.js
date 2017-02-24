@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Member = require('../../db/queries/members');
+var Feedback = require('../../db/queries/feedbacks');
 
 router.get('/', function(req, res, next) {
   Member.list().then(function (members) {
@@ -11,6 +12,12 @@ router.get('/', function(req, res, next) {
 router.get('/:id', function(req, res, next) {
   Member.read(req.params.id).then(function (member) {
     res.json(member);
+  });
+});
+
+router.get('/:id/feedback', function(req, res, next) {
+  Feedback.memberList(req.params.id).then(function (feedback) {
+    res.json(feedback);
   });
 });
 
