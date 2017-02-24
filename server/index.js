@@ -5,6 +5,7 @@ var config = require('./config');
 var bodyParser = require('body-parser');
 var teams = require('./api/teams');
 var members = require('./api/members');
+var surveys = require('./api/surveys');
 
 module.exports = function(options) {
   var Renderer = require("../config/SimpleRenderer.js");
@@ -32,6 +33,7 @@ module.exports = function(options) {
 
   app.use('/api/team', teams);
   app.use('/api/member', members);
+  app.use('/api/survey', surveys);
 
   app.get("/*", function(req, res) {
     renderer.render(

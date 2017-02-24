@@ -1,17 +1,24 @@
 import { Team, Member } from '../main/model';
 import axios from 'axios';
 
-export const ADD_MEMBER = 'ADD_MEMBER';
-export const GET_TEAM_MEMBERS = 'GET_TEAM_MEMBERS';
-export const DELETE_MEMBER = 'DELETE_MEMBER';
-export const EDIT_MEMBER = 'EDIT_MEMBER';
+import { 
+  GET_TEAM_MEMBERS, 
+  ADD_MEMBER, 
+  SET_MEMBER, 
+  EDIT_MEMBER, 
+  DELETE_MEMBER 
+} from './constants/ActionTypes';
 
 const getTeamMembers = (team: Team) => {
   return dispatch => {
     axios.get(`/api/team/${team.id}/member/`).then(result => {
-      dispatch({ type: GET_TEAM_MEMBERS, payload: {team, members: result.data}})
+      dispatch({ type: GET_TEAM_MEMBERS, payload: result.data})
     })
   }
+};
+
+const setMember = (member: Member) => {
+  return { type: SET_MEMBER, payload: member };
 };
 
 const addMember = (team: Team, name: string) => {
@@ -43,6 +50,7 @@ const editMember = (member: Member, name: string) => {
 export const actions = {
   getTeamMembers,
   addMember,
+  setMember,
   deleteMember,
   editMember
 }

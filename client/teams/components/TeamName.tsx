@@ -6,8 +6,11 @@ import NameInput from './NameInput';
 interface NameProps {
   team: Team;
   getTeamMembers: (team:Team)=>void;
+  getTeamSurveys: (team:Team)=>void;
   editTeam: (team:Team, name:string)=>void;
+  setTeam: (team:Team)=>void;
   deleteTeam: (team:Team)=>void;
+  selected: boolean;
   key?: any;
 };
 
@@ -16,8 +19,8 @@ interface NameState {
 };
 
 class TeamName extends React.Component<NameProps, NameState> {
-  constructor(props, conname) {
-    super(props, conname);
+  constructor(props, context) {
+    super(props, context);
     this.state = {
       editing: false
     };
@@ -25,6 +28,12 @@ class TeamName extends React.Component<NameProps, NameState> {
 
   handleDoubleClick() {
     this.setState({ editing: true });
+  }
+
+  handleClick() {
+    this.props.getTeamMembers(this.props.team);
+    this.props.getTeamSurveys(this.props.team);
+    this.props.setTeam(this.props.team);
   }
 
   handleSave(team:Team, name:string) {
@@ -59,8 +68,8 @@ class TeamName extends React.Component<NameProps, NameState> {
 
     return (
       <li onDoubleClick={this.handleDoubleClick.bind(this)}
-          onClick={() => getTeamMembers(team)}
-          className={classNames({ editing: this.state.editing }, 
+          onClick={this.handleClick.bind(this)}
+          className={classNames({ editing: this.state.editing }, { selected: this.props.selected}, 
             "pure-menu-form", "pure-menu-link", "pure-form", "hand")}>
         {element}
       </li>

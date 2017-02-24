@@ -5,15 +5,24 @@ import { Member, Members, State } from '../main/model';
 import {
   GET_TEAM_MEMBERS,
   ADD_MEMBER,
+  SET_MEMBER,
   DELETE_MEMBER,
   EDIT_MEMBER
-} from './actions';
+} from './constants/ActionTypes';
 
-const initialState: State = {teams: [], members: {list: [], team: null}};
+const initialState: State = {
+  teams: {list: [], selected: null}, 
+  surveys: {list: [], selected: null},
+  members: {list: [], selected: null}
+};
 
 export default handleActions<State, Member>({
-  [GET_TEAM_MEMBERS]: (state: Members, action: Action<any>): Members => {
-    return {team: action.payload.team, list: action.payload.members};
+  [GET_TEAM_MEMBERS]: (state: Members, action: Action<Member[]>): Members => {
+    return {selected: null, list: action.payload};
+  },
+
+  [SET_MEMBER]: (state: Members, action: Action<Member>): Members => {
+    return {list: state.list, selected: action.payload};
   },
 
   [ADD_MEMBER]: (state: Members, action: Action<Member>): Members => {
@@ -22,7 +31,7 @@ export default handleActions<State, Member>({
         id: action.payload.id,
         name: action.payload.name
       }, ...state.list],
-      team: state.team
+      selected: state.selected
     };
   },
 
@@ -30,7 +39,7 @@ export default handleActions<State, Member>({
     let members: Member[] = state.list.filter(member => {
       return member.id !== action.payload.id
     });
-    return {list: members, team: state.team};
+    return {list: members, selected: state.selected};
   },
 
   [EDIT_MEMBER]: (state: Members, action: Action<Member>): Members => {
@@ -39,6 +48,6 @@ export default handleActions<State, Member>({
         ? assign(<Member>{}, member, { name: action.payload.name })
         : member
     });
-    return {list: members, team: state.team};
+    return {list: members, selected: state.selected};
   },
 }, initialState);

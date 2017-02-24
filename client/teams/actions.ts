@@ -1,10 +1,13 @@
 import { Team } from '../main/model';
 import axios from 'axios';
 
-export const GET_TEAMS = 'GET_TEAMS';
-export const ADD_TEAM = 'ADD_TEAM';
-export const DELETE_TEAM = 'DELETE_TEAM';
-export const EDIT_TEAM = 'EDIT_TEAM';
+import { 
+  GET_TEAMS, 
+  SET_TEAM, 
+  ADD_TEAM, 
+  EDIT_TEAM, 
+  DELETE_TEAM 
+} from './constants/ActionTypes';
 
 const getTeams = () => {
   return dispatch => {
@@ -12,6 +15,10 @@ const getTeams = () => {
       dispatch({ type: GET_TEAMS, payload: result.data})
     })
   }
+};
+
+const setTeam = (team: Team) => {
+  return { type: SET_TEAM, payload: team};
 };
 
 const addTeam = (name: string) => {
@@ -43,6 +50,7 @@ const editTeam = (team: Team, name: string) => {
 export const actions = {
   getTeams,
   addTeam,
+  setTeam,
   deleteTeam,
   editTeam
 }

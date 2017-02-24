@@ -8,7 +8,11 @@ import { State } from './main/model';
 import App from './main/components/App';
 import rootReducer from './main/reducer';
 
-const initialState: State = {teams: [], members: {list: [], team: null}};
+const initialState: State = {
+  teams: {list: [], selected: null}, 
+  surveys: {list: [], selected: null},
+  members: {list: [], selected: null}
+};
 
 const store: Store<any> = createStore(rootReducer, initialState, applyMiddleware(
   thunk

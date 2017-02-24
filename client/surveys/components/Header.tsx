@@ -4,7 +4,7 @@ import NameInput from './NameInput';
 import { Team } from '../../main/model';
 
 interface HeaderProps {
-  addMember: (team: Team, name:string)=> any;
+  addSurvey: (team: Team, name:string)=> any;
   team: Team;
 };
 
@@ -20,11 +20,11 @@ class Header extends React.Component<HeaderProps, HeaderSectionState> {
 
   handleSave(name: string) {
     if (name.length !== 0) {
-      this.props.addMember(this.props.team, name);
+      this.props.addSurvey(this.props.team, name);
     }
   }
 
-  toggleNewMemberForm() {
+  toggleNewSurveyForm() {
     this.setState({ addNew: !this.state.addNew })
   }
 
@@ -33,19 +33,19 @@ class Header extends React.Component<HeaderProps, HeaderSectionState> {
     if (this.state.addNew) {
       element = ( 
         <NameInput
-          newMember
+          newSurvey
           onSave={this.handleSave.bind(this)}
-          placeholder="New Member Name"
+          placeholder="New Survey Name"
         />
       )
     }
     return (
-      <header className="pure-form pure-form-stacked">
-        <h1> Members </h1>
+      <header className="header pure-form pure-form-stacked">
+        <h1> Surveys </h1>
         <button 
           className="pure-button button-primary"
-          onClick={this.toggleNewMemberForm.bind(this)} > 
-          Add New Member </button>
+          onClick={this.toggleNewSurveyForm.bind(this)} > 
+          Add New Survey </button>
         {element}
       </header>
     );

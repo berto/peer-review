@@ -6,7 +6,9 @@ import NameInput from './NameInput';
 interface NameProps {
   member: Member;
   editMember: (member:Member, name:string)=>void;
+  setMember: (member:Member)=>void;
   deleteMember: (member:Member)=>void;
+  selected: boolean;
   key?: any;
 };
 
@@ -57,8 +59,8 @@ class MemberName extends React.Component<NameProps, NameState> {
     }
 
     return (
-      <li onDoubleClick={this.handleDoubleClick.bind(this)}
-          className={classNames({ editing: this.state.editing }, 
+      <li onDoubleClick={this.handleDoubleClick.bind(this)} onClick={() => this.props.setMember(member)}
+          className={classNames({ editing: this.state.editing }, { selected: this.props.selected},  
             "pure-menu-form", "pure-menu-link", "pure-form", "hand")}>
         {element}
       </li>

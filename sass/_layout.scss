@@ -1,3 +1,8 @@
+h1 {
+  margin: 0;
+  padding: 0.5em;
+}
+
 .hand:hover {
   cursor: pointer;
 }
@@ -10,6 +15,14 @@
   color: red;
 }
 
+.success:hover {
+  color: green;
+}
+
 .hide {
   display: none;
+}
+
+.selected {
+  border-left: 6px solid #1b98f8;
 }

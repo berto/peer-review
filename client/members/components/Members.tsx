@@ -6,28 +6,26 @@ import MainSection from './MainSection';
 
 interface MembersProps {
   members: Member[];
+  member: Member;
   team: Team;
   addMember: (team:Team, text:string)=> void;
+  setMember: (member:Member)=> void;
   editMember: (member:Member, text:string)=>void;
   deleteMember: (member:Member)=> void;
 };
 
 class Members extends React.Component<MembersProps, void> {
   render() {
-    let element;
-    if (this.props.team) {
-      element = (
+    return (
+      <section className="list pure-u">
         <Header 
           team={this.props.team}
           addMember={this.props.addMember} />
-      );
-    }
-    return (
-      <section className="member-list pure-u">
-        {element}
         <MainSection
           members={this.props.members}
+          member={this.props.member}
           editMember={this.props.editMember}
+          setMember={this.props.setMember}
           deleteMember={this.props.deleteMember}/>
       </section>
     );

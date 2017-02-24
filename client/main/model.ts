@@ -8,14 +8,29 @@ export type Member = {
   name: string;
 };
 
+export type Survey = {
+  id?: string;
+  name: string;
+};
+
 export interface State {
-  teams: Team[];
+  teams: Teams;
   members: Members;
+  surveys: Surveys;
 }
 
 export interface Members {
   list: Member[];
-  team: Team;
+  selected: Member;
 }
 
-export type Teams = Team[];
+export interface Surveys {
+  list: Survey[];
+  selected: Survey;
+}
+
+export interface Teams {
+  list: Team[];
+  selected: Team;
+}
+
