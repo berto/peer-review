@@ -1,0 +1,46 @@
+.form-page {
+  background: $dark-blue; 
+  width: 100vw;
+  height: 100vh;
+}
+
+.form {
+  width: 50%;
+  maring: 0 auto;
+  width: 50vw;
+  margin: 0 auto;
+  border-radius: 20px;
+  color: $white;
+  padding: 1em;
+  height: 95%;
+  box-sizing: border-box;
+  h1 {
+    padding-left: 0;
+    padding-top: 0;
+  }
+  label {
+    margin: 0.2em 0 0.2em;
+  }
+}
+
+textarea {
+  color: $black;
+  font-size: 1em;
+  width: 90%;
+  height: 200px;
+  resize: none;
+  margin-bottom: 1em;
+}
+
+.member-feedback {
+  margin-top: 1em;
+}
+
+.feedbacks {
+  height: 80%;
+  overflow: scroll;
+}
+
+.submit {
+  margin-top: 1em;
+}

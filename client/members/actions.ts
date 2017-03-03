@@ -1,8 +1,9 @@
-import { Team, Member } from '../main/model';
+import { Team, Member, Survey } from '../main/model';
 import axios from 'axios';
 
 import { 
   GET_TEAM_MEMBERS, 
+  GET_SURVEY_MEMBERS, 
   ADD_MEMBER, 
   SET_MEMBER, 
   EDIT_MEMBER, 
@@ -13,6 +14,14 @@ const getTeamMembers = (team: Team) => {
   return dispatch => {
     axios.get(`/api/team/${team.id}/member/`).then(result => {
       dispatch({ type: GET_TEAM_MEMBERS, payload: result.data})
+    })
+  }
+};
+
+const getSurveyMembers = (survey_id: number) => {
+  return dispatch => {
+    axios.get(`/api/survey/${survey_id}/member/`).then(result => {
+      dispatch({ type: GET_SURVEY_MEMBERS, payload: result.data})
     })
   }
 };
@@ -49,6 +58,7 @@ const editMember = (member: Member, name: string) => {
 
 export const actions = {
   getTeamMembers,
+  getSurveyMembers,
   addMember,
   setMember,
   deleteMember,

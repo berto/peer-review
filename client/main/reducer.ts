@@ -5,13 +5,15 @@ import teams from '../teams';
 import members from '../members';
 import surveys from '../surveys';
 import feedback from '../feedback';
+import form from '../form';
 
 const rootReducer = combineReducers({
   routing: routerReducer,
   teams,
   members,
   surveys,
-  feedback
+  feedback,
+  form
 });
 
 export default rootReducer;

@@ -11,6 +11,12 @@ module.exports = {
   read: function (id) {
     return knex('survey').where({id: id}).first();
   },
+  readMembers: function (id) {
+    return knex('survey')
+      .join('team', 'survey.team_id', 'team.id')
+      .join('member', 'member.team_id', 'team.id')
+      .where({'survey.id': id});
+  },
   create: function (id, name) {
     return knex('survey').insert({
       id: uuid(),

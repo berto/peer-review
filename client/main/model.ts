@@ -18,6 +18,7 @@ export interface State {
   members: Members;
   surveys: Surveys;
   feedback: Feedback;
+  form: Form; 
 }
 
 export interface Members {
@@ -30,6 +31,18 @@ export interface Feedback {
   text: string[];
 }
 
+export interface Form {
+  submitted: boolean;
+  feedback: MemberFeedback[];
+}
+
+export interface MemberFeedback {
+  id: number;
+  name: string;
+  rating: number;
+  text: string;
+}
+
 export interface Surveys {
   list: Survey[];
   selected: Survey;
@@ -40,3 +53,6 @@ export interface Teams {
   selected: Team;
 }
 
+export type Params = {
+  id: string;
+};

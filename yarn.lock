@@ -3983,6 +3983,10 @@ react-router@^3.0.2:
     loose-envify "^1.2.0"
     warning "^3.0.0"
 
+react-stars@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/react-stars/-/react-stars-2.1.0.tgz#b3fdd63c888b86fbf634fc15abbed2ffb7db07b1"
+
 react@0.14.7:
   version "0.14.7"
   resolved "https://registry.yarnpkg.com/react/-/react-0.14.7.tgz#76c4e5cfa204caa5aaf42b13008f0d3f6d58a133"

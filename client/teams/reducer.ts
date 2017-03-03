@@ -1,6 +1,7 @@
 import { assign } from 'lodash';
 import { handleActions, Action } from 'redux-actions';
 import { Team, Teams, State } from '../main/model';
+import initialState from '../main/initialState';
 
 import {
   GET_TEAMS,
@@ -9,13 +10,6 @@ import {
   DELETE_TEAM,
   EDIT_TEAM
 } from './constants/ActionTypes';
-
-const initialState: State = {
-  teams: {list: [], selected: null}, 
-  surveys: {list: [], selected: null},
-  members: {list: [], selected: null},
-  feedback: {text: [], rating: 0}
-};
 
 export default handleActions<State, Teams>({
   [GET_TEAMS]: (state: Teams, action: Action<Team[]>): Teams => {

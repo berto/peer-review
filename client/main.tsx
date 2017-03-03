@@ -6,17 +6,11 @@ import { Router, Route, browserHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 import thunk from 'redux-thunk';
 import { State } from './main/model';
+import initialState from './main/initialState';
 
 import App from './main/components/App';
-import SurveyForm from './surveys/components/SurveyForm';
+import SurveyForm from './form/components/SurveyForm';
 import rootReducer from './main/reducer';
-
-const initialState: State = {
-  teams: {list: [], selected: null}, 
-  surveys: {list: [], selected: null},
-  members: {list: [], selected: null},
-  feedback: {text: [], rating: 0}
-};
 
 const store: Store<any> = createStore(rootReducer, initialState, applyMiddleware(
   thunk
