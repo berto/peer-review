@@ -5,7 +5,7 @@ const initialState: State = {
   surveys: {list: [], selected: null},
   members: {list: [], selected: null},
   feedback: {text: [], rating: 0},
-  form: {submitted: false, feedback: [{id: 0,name: null, rating: 0, text: null}]}
+  form: {submitted: false}
 };
 
 export default initialState;

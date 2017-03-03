@@ -1,14 +1,14 @@
-import { Team, Survey } from '../main/model';
+import { Team, Survey, MemberFeedback } from '../main/model';
 import axios from 'axios';
 
 import { 
-  ADD_PEER, 
+  SUBMIT_FEEDBACK
 } from './constants/ActionTypes';
 
-const addPeer = () => {
-  return { type: ADD_PEER };
+const submitFeedback = (feedback:MemberFeedback[]) => {
+  return { type: SUBMIT_FEEDBACK };
 };
 
 export const actions = {
-  addPeer
+  submitFeedback
 }

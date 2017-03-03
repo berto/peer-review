@@ -33,7 +33,6 @@ export interface Feedback {
 
 export interface Form {
   submitted: boolean;
-  feedback: MemberFeedback[];
 }
 
 export interface MemberFeedback {

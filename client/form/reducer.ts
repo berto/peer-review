@@ -4,13 +4,13 @@ import { Member, MemberFeedback, Members, Form, State } from '../main/model';
 import initialState from '../main/initialState';
 
 import {
-  ADD_PEER,
+  SUBMIT_FEEDBACK
 } from './constants/ActionTypes';
 
 export default handleActions<State, Form>({
 
-  [ADD_PEER]: (state: Form, action: Action<MemberFeedback>): Form => {
-    state.feedback.push({id: action.payload.id, name: null, rating: 0, text: null})
+  [SUBMIT_FEEDBACK]: (state: Form): Form => {
+    state.submitted = true;
     return state;
   }
 

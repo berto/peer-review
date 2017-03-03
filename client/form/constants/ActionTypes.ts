@@ -1,1 +1,1 @@
-export const ADD_PEER = 'ADD_PEER';
+export const SUBMIT_FEEDBACK = 'SUBMIT_FEEDBACK';

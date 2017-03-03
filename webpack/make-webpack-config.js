@@ -37,6 +37,10 @@ module.exports = function(options) {
     "eot|svg|ttf|woff|woff2": {
       loaders: ["file-loader"]
     },
+    "gif": {
+      loaders: ["url-loader"],
+      output: { "publicPath": "/" }
+    },
     "scss": {
       loaders: ["style-loader", "css-loader", "sass-loader"]
     }

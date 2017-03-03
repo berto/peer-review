@@ -1,5 +1,4 @@
 import * as React from 'react';
-
 import FeedbackForm from './FeedbackForm';
 
 import { Members, MemberFeedback, Form as FormType } from '../../main/model';
@@ -9,10 +8,11 @@ interface FormProps {
   members: Members;
   form: FormType;
   getSurveyMembers: (survey_id:string)=> void;
-  addPeer: () => void;
+  submitFeedback: (feedback:MemberFeedback[])=> void;
 };
 
 interface FormState {
+  submitted: boolean;
   feedback: MemberFeedback[];
 };
 
@@ -20,6 +20,7 @@ class Form extends React.Component<FormProps, FormState> {
   constructor (props, context) {
     super(props, context);
     this.state = {
+      submitted: false,
       feedback: [{id: 0, name: "", text: "", rating: null}] 
     };
   }
@@ -41,25 +42,46 @@ class Form extends React.Component<FormProps, FormState> {
   }
 
   handleSubmit () {
-    console.log(this.state.feedback);
+    this.state.submitted = true;
+    this.setState(this.state);
+    this.props.submitFeedback(this.state.feedback);
   }
 
   render() {
-    return (
-      <section className="form">
-        <h1> Peer Review </h1>
-        <div className="feedbacks">
-          {this.state.feedback.map((_,i) => 
-          <FeedbackForm 
-           key={i}
-            id={i}
-            update={this.handleUpdate.bind(this)}
-            members={this.props.members} />
-          )}
-          <button onClick={this.handleAddPeer.bind(this)} className="pure-button button-secondary"> Add Peer </button>
+    let form = (
+      <section className="submitted">
+        <h1> Submitted </h1>
+        <div className="image">
+          <img src={require("../../assets/dance.gif")} />
         </div>
-        <button onClick={this.handleSubmit.bind(this)} className="pure-button button-secondary right submit"> Submit Feedback </button>
       </section>
+    )
+    if (!this.props.form.submitted) {
+      form = (
+        <div>
+          <section className="form">
+            <h1> Peer Review </h1>
+            <div className="feedbacks">
+              {this.state.feedback.map((_,i) => 
+              <FeedbackForm 
+                key={i}
+                id={i}
+                update={this.handleUpdate.bind(this)}
+                members={this.props.members} />
+              )}
+              <button onClick={this.handleAddPeer.bind(this)} className="pure-button button-primary"> Add Peer </button>
+            </div>
+          </section>
+          <section className="submit">
+            <button onClick={this.handleSubmit.bind(this)} className="pure-button button-secondary right submit"> Submit Feedback </button>
+          </section>
+        </div>
+      )
+    }
+    return (
+      <div>
+        {form}
+      </div>
     );
   }
 }

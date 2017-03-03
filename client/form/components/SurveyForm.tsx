@@ -22,7 +22,7 @@ class SurveyForm extends React.Component<SurveyFormProps, void> {
           form={this.props.form}
           survey_id={this.props.params.id}
           getSurveyMembers={this.props.actions.getSurveyMembers}
-          addPeer={this.props.actions.addPeer}/>
+          submitFeedback={this.props.actions.submitFeedback}/>
       </div>
     );
   }
