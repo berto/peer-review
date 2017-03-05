@@ -38,6 +38,7 @@ export interface Form {
 export interface MemberFeedback {
   id: number;
   name: string;
+  member_id: string;
   rating: number;
   text: string;
 }

@@ -12,6 +12,7 @@ interface FeedbackFormState {
   rating: number;
   tempRating: number;
   currentName: string;
+  memberId: string;
   text: string;
 };
 
@@ -22,12 +23,14 @@ class FeedbackForm extends React.Component<FeedbackFormProps, FeedbackFormState>
       rating: null,
       tempRating: null,
       currentName: "Pick a Name",
+      memberId: null,
       text: ""
     };
   }
 
-  selectName(name) {
+  selectName(name, id) {
     this.state.currentName = name;
+    this.state.memberId = id;
     this.setState(this.state);
     this.handleUpdate();
   }
@@ -54,7 +57,8 @@ class FeedbackForm extends React.Component<FeedbackFormProps, FeedbackFormState>
       id: this.props.id,
       rating: this.state.rating,
       text: this.state.text,
-      name: this.state.currentName
+      name: this.state.currentName,
+      member_id: this.state.memberId
     });
   }
 
@@ -93,7 +97,7 @@ class FeedbackForm extends React.Component<FeedbackFormProps, FeedbackFormState>
           <span> {this.state.currentName} </span>
           <ul>
             {this.props.members.list.map((member, i) => 
-            <li key={i} onClick={this.selectName.bind(this, member.name)}> {member.name} </li>
+            <li key={i} onClick={this.selectName.bind(this, member.name, member.id)}> {member.name} </li>
             )}
           </ul>
         </div>

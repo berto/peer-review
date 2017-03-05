@@ -8,7 +8,7 @@ interface FormProps {
   members: Members;
   form: FormType;
   getSurveyMembers: (survey_id:string)=> void;
-  submitFeedback: (feedback:MemberFeedback[])=> void;
+  submitFeedback: (survey_id:string, feedback:MemberFeedback[])=> void;
 };
 
 interface FormState {
@@ -21,7 +21,7 @@ class Form extends React.Component<FormProps, FormState> {
     super(props, context);
     this.state = {
       submitted: false,
-      feedback: [{id: 0, name: "", text: "", rating: null}] 
+      feedback: [{id: 0, member_id: null, name: "", text: "", rating: null}] 
     };
   }
 
@@ -30,7 +30,7 @@ class Form extends React.Component<FormProps, FormState> {
   }
 
   handleAddPeer (i) {
-    this.state.feedback.push({id: this.state.feedback.length, name: "", text: "", rating: null});
+    this.state.feedback.push({id: this.state.feedback.length, member_id: null, name: "", text: "", rating: null});
     this.setState(this.state);
   }
 
@@ -44,7 +44,7 @@ class Form extends React.Component<FormProps, FormState> {
   handleSubmit () {
     this.state.submitted = true;
     this.setState(this.state);
-    this.props.submitFeedback(this.state.feedback);
+    this.props.submitFeedback(this.props.survey_id, this.state.feedback);
   }
 
   render() {
@@ -56,7 +56,7 @@ class Form extends React.Component<FormProps, FormState> {
         </div>
       </section>
     )
-    if (!this.props.form.submitted) {
+    if (!this.state.submitted) {
       form = (
         <div>
           <section className="form">

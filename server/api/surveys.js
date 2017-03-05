@@ -27,6 +27,20 @@ router.get('/:id/member/:member_id/feedback', function(req, res, next) {
   });
 });
 
+router.post('/:id/feedback', function(req, res, next) {
+  var feedbacks = req.body.map(function (feedback) {
+    return Feedback.create({
+      survey_id: req.params.id,
+      member_id: feedback.member_id,
+      feedback: feedback.text,
+      score: feedback.rating + 1
+    });
+  });
+  Promise.all(feedbacks).then(function (result) {
+    res.json(result);
+  });
+});
+
 router.post('/', function(req, res, next) {
   Survey.create(req.body.name).then(function (id) {
     res.json({success:true, id: id[0]});
