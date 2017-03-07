@@ -63,7 +63,10 @@ class FeedbackForm extends React.Component<FeedbackFormProps, FeedbackFormState>
   }
 
   handleInput() {
-    this.state.text = this.refs.text.value;
+    let input = this.refs.text.value;
+    if (input.length < 1000) {
+      this.state.text = input;
+    }
     this.setState(this.state);
     this.handleUpdate();
   }
@@ -104,7 +107,7 @@ class FeedbackForm extends React.Component<FeedbackFormProps, FeedbackFormState>
         <div className="star-box">
           {stars}
         </div>
-        <textarea ref="text" onChange={this.handleInput.bind(this)} placeholder="Type feedback here..."></textarea>
+        <textarea ref="text" value={this.state.text} onChange={this.handleInput.bind(this)} placeholder="Type feedback here..."></textarea>
       </div>
     );
   }

@@ -9,28 +9,38 @@ interface NameInputProps {
 
 interface NameInputState {
   name: string;
+  tempName: string;
 }
 
 class NameInput extends React.Component<NameInputProps, NameInputState> {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      name: this.props.name || ''
+      name: this.props.name || '',
+      tempName: this.props.name || ''
     };
   }
 
   handleSubmit(e) {
+    if (e.which === 27) { 
+      this.props.onSave(this.state.tempName);
+    }
     const name = e.target.value.trim();
     if (e.which === 13) {
       this.props.onSave(name);
+      this.state.tempName = name;
       if (this.props.newSurvey) {
-        this.setState({ name: '' });
+        this.state.name = '';
       }
+      this.setState(this.state);
     }
   }
 
   handleChange(e) {
-    this.setState({ name: e.target.value });
+    if (e.target.value.length < 25) {
+      this.state.name = e.target.value;
+      this.setState(this.state);
+    }
   }
 
   handleBlur(e) {
@@ -38,6 +48,7 @@ class NameInput extends React.Component<NameInputProps, NameInputState> {
       this.props.onSave(e.target.value);
     }
   }
+
 
   render() {
     return (

@@ -36,7 +36,7 @@ class Form extends React.Component<FormProps, FormState> {
 
   handleUpdate (feedback) {
     this.state.feedback = this.state.feedback.map(fb => {
-      return feedback.id === fb.id ? feedback : fb
+      return feedback.id === fb.id && feedback.name ? feedback : fb
     })
     this.setState(this.state);
   }
