@@ -3,6 +3,7 @@ node_modules/
 typings/
 npm-debug.log
 build/stats-dev.json*
+build/public
 tmp/
 dist/
 .sw[a-z]
