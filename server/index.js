@@ -1,11 +1,15 @@
+require('dotenv').config();
 var path = require('path');
 var express = require('express');
 var http = require('http');
 var config = require('./config');
 var bodyParser = require('body-parser');
+var session = require('express-session');
+var cookieParser = require('cookie-parser');
 var teams = require('./api/teams');
 var members = require('./api/members');
 var surveys = require('./api/surveys');
+var passport = require('./auth');
 
 module.exports = function(options) {
   var Renderer = require("../config/SimpleRenderer.js");
@@ -22,6 +26,14 @@ module.exports = function(options) {
 
   var app = express();
 
+  app.use(cookieParser());
+  app.use(passport.initialize());
+  app.set('trust proxy', 1) // trust first proxy
+  app.use(session({
+    secret: process.env.CLIENT_SECRET,
+    cookie: { secure: true }
+  }))
+
   // serve the static assets
   app.use("/_assets", express.static(path.join(__dirname, "..", "build", "public"), {
     maxAge: "200d" // We can cache them as they include hashes
@@ -30,6 +42,16 @@ module.exports = function(options) {
 
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: false }));
+
+  app.get('/auth', passport.authenticate('provider'));
+
+  app.get('/auth/github/callback', function (req, res, next) {
+    console.log("getting here");
+    passport.authenticate('provider', function(err, user){
+      console.log('user', user);
+      res.redirect('/');
+    })(req, res, next);
+  });
 
   app.use('/api/team', teams);
   app.use('/api/member', members);
