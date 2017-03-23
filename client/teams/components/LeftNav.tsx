@@ -33,9 +33,17 @@ class LeftNav extends React.Component<LeftNavProps, void> {
           setTeam={this.props.setTeam}
           editTeam={this.props.editTeam}
           deleteTeam={this.props.deleteTeam}/>
-        <footer>
-          <a href="https://github.com/berto/peer-review"> Code </a>
-          <a href="/docs"> API Docs </a>
+        <footer className="pure-form pure-form-stacked">
+          <a href="https://github.com/berto/peer-review"> 
+            <button 
+              className="pure-button button-secondary"> 
+              Code </button>
+          </a>
+          <a href="/docs"> 
+            <button 
+              className="pure-button button-secondary"> 
+              Documentation </button>
+          </a>
         </footer>
       </section>
     );

@@ -6,11 +6,20 @@
   input {
     color: $black;
   }
-  header {
+  header, footer {
     margin: 1em;
   }
+  footer { 
+    button {
+      display: block;
+      margin-top: 1em;
+    }
+    a {
+      text-decoration: none;
+    }
+  }
   .pure-menu {
-    height: 60%;
+    height: 50%;
     overflow: scroll;
   }
   .pure-menu-link {
