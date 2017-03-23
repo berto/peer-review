@@ -2,7 +2,7 @@ import * as React from 'react';
 
 class Login extends React.Component<void, void> {
   login () {
-    
+    window.location.href = '/auth'; 
   }
   render() {
     return (

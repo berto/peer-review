@@ -39,10 +39,16 @@ module.exports = function(options) {
     maxAge: "200d" // We can cache them as they include hashes
   }));
   app.use("/", express.static(path.join(__dirname, "..", "public"), {}));
+  app.use("/docs", express.static(path.join(__dirname, "..", "apidoc"), {}));
 
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: false }));
 
+  /**
+  * @api {get} /auth Login Through Galvanize's SSO
+  * @apiName Login
+  * @apiGroup Auth
+  */
   app.get('/auth', passport.authenticate('provider'));
 
   app.get('/auth/github/callback', function (req, res, next) {

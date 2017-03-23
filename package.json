@@ -1,7 +1,7 @@
 {
   "name": "redux-react-ts-starter",
   "version": "1.0.0",
-  "description": "Redux, React, and Typescript starter app. Because no one should do this more than once.",
+  "description": "Provide feedback to members for your group",
   "repository": {
     "type": "git",
     "url": "git@github.com:berto/redux-react-typescript-starter.git"
@@ -15,6 +15,9 @@
   },
   "author": "Roberto Ortega <berto.ort@gmail.com>",
   "license": "ISC",
+  "apidoc": {
+    "title": "Peer Review API Docs"
+  },
   "dependencies": {
     "axios": "^0.15.3",
     "body-parser": "^1.16.1",

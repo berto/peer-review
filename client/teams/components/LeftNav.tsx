@@ -33,6 +33,10 @@ class LeftNav extends React.Component<LeftNavProps, void> {
           setTeam={this.props.setTeam}
           editTeam={this.props.editTeam}
           deleteTeam={this.props.deleteTeam}/>
+        <footer>
+          <a href="https://github.com/berto/peer-review"> Code </a>
+          <a href="/docs"> API Docs </a>
+        </footer>
       </section>
     );
   }
