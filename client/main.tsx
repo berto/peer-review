@@ -10,6 +10,7 @@ import initialState from './main/initialState';
 
 import App from './main/components/App';
 import SurveyForm from './form/components/SurveyForm';
+import Login from './auth/components/Login.tsx';
 import rootReducer from './main/reducer';
 
 const store: Store<any> = createStore(rootReducer, initialState, applyMiddleware(
@@ -22,6 +23,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
       <Route path="/" component={App}/>
+      <Route path="/login" component={Login}/>
       <Route path="/survey/:id" component={SurveyForm}/>
     </Router>
   </Provider>,
