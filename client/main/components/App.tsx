@@ -15,6 +15,12 @@ interface AppProps {
 }
 
 class App extends React.Component<AppProps, void> {
+  componentWillMount() {
+    let token = localStorage.getItem('user_token');
+    if (!token) {
+      window.location.href = '/login';
+    }
+  }
   render() {
     const { actions, teams, members, surveys, feedback } = this.props;
     let team, feedbackInfo;
@@ -36,6 +42,10 @@ class App extends React.Component<AppProps, void> {
           deleteSurvey={actions.deleteSurvey}
           getMemberFeedback={actions.getMemberFeedback}/>
       )
+    } else {
+      team = (
+        <p className="ghost"> 👻 </p>
+      ) 
     }
     if (members.selected) {
       feedbackInfo = (

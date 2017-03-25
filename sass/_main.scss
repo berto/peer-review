@@ -2,6 +2,7 @@
   display: inline-block;
   height: 100vh;
   width: 100%;
+  min-width: 500px;
   & > header {
     height: 10%;
     min-height: 4em;
@@ -11,4 +12,13 @@
     border-right: 1px solid #ddd;
     box-sizing: border-box;
   }
+}
+
+.ghost {
+  font-size: 200%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }

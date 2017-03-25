@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Loading from './Loading'; 
 
 class Login extends React.Component<void, void> {
   login () {
@@ -6,16 +7,14 @@ class Login extends React.Component<void, void> {
   }
   render() {
     return (
-      <section className="left-nav pure-u">
-        <header className="header pure-form pure-form-stacked">
-          <h1> Login </h1>
-           <button 
-             className="pure-button button-secondary"
-             onClick={this.login.bind(this)} > 
-             Github </button>
-        </header>
+      <section className="pure-u login">
+        <h1> Peer Review Login </h1>
+        <button 
+          className="pure-button button-secondary"
+          onClick={this.login.bind(this)} > 
+          Galvanize </button>
       </section>
-    );
+    )
   }
 }
 

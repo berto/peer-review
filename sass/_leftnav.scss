@@ -2,7 +2,7 @@
   background: $dark-blue;
   color: $white;
   height: 100vh;
-  min-width: 20%;
+  min-width: 220px;
   input {
     color: $black;
   }
@@ -21,6 +21,9 @@
   .pure-menu {
     height: 50%;
     overflow: scroll;
+  }
+  .pure-menu-heading {
+    color: $deep-blue;
   }
   .pure-menu-link {
     &:hover {

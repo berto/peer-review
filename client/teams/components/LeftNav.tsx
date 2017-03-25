@@ -20,6 +20,10 @@ class LeftNav extends React.Component<LeftNavProps, void> {
   componentWillMount() {
     this.props.getTeams()
   }
+  logout() {
+    localStorage.removeItem('user_token');
+    window.location.href = "/login";
+  }
   render() {
     return (
       <section className="left-nav pure-u">
@@ -34,16 +38,9 @@ class LeftNav extends React.Component<LeftNavProps, void> {
           editTeam={this.props.editTeam}
           deleteTeam={this.props.deleteTeam}/>
         <footer className="pure-form pure-form-stacked">
-          <a href="https://github.com/berto/peer-review"> 
-            <button 
-              className="pure-button button-secondary"> 
-              Code </button>
-          </a>
-          <a href="/docs"> 
-            <button 
-              className="pure-button button-secondary"> 
-              Documentation </button>
-          </a>
+          <a className="pure-menu-heading" target="_blank" href="https://github.com/berto/peer-review"> Code </a>
+          <a className="pure-menu-heading" target="_blank" href="/docs"> Documentation </a>
+          <a className="pure-menu-heading" href="#" onClick={this.logout.bind(this)}> Log Out </a>
         </footer>
       </section>
     );
