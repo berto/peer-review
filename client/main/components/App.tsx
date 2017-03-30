@@ -63,6 +63,7 @@ class App extends React.Component<AppProps, void> {
           getTeamMembers={actions.getTeamMembers}
           getTeamSurveys={actions.getTeamSurveys}
           getTeams={actions.getTeams}
+          getCohorts={actions.getCohorts}
           setTeam={actions.setTeam}
           editTeam={actions.editTeam}
           deleteTeam={actions.deleteTeam}/>

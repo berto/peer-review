@@ -12,6 +12,7 @@ interface LeftNavProps {
   getTeamSurveys: (team:Team)=>void;
   setTeam: (team:Team)=>void;
   getTeams: () => void;
+  getCohorts: (token:string)=> any;
   editTeam: (team:Team, text:string)=>void;
   deleteTeam: (team:Team)=> void;
 };
@@ -27,7 +28,9 @@ class LeftNav extends React.Component<LeftNavProps, void> {
   render() {
     return (
       <section className="left-nav pure-u">
-        <Header addTeam={this.props.addTeam} />
+        <Header 
+          addTeam={this.props.addTeam}
+          getCohorts={this.props.getCohorts}/>
         <MainSection
           teams={this.props.teams}
           team={this.props.team}

@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import { 
   GET_TEAMS, 
+  GET_COHORTS, 
   SET_TEAM, 
   ADD_TEAM, 
   EDIT_TEAM, 
@@ -13,6 +14,15 @@ const getTeams = () => {
   return dispatch => {
     axios.get('/api/team/').then(result => {
       dispatch({ type: GET_TEAMS, payload: result.data})
+    })
+  }
+};
+
+const getCohorts = token => {
+  return dispatch => {
+    axios.get('/api/cohort/', {headers: { 'Authorization': `Bearer ${token}` }}).then(result => {
+      console.log(result);
+      dispatch({ type: GET_COHORTS, payload: result})
     })
   }
 };
@@ -49,6 +59,7 @@ const editTeam = (team: Team, name: string) => {
 
 export const actions = {
   getTeams,
+  getCohorts,
   addTeam,
   setTeam,
   deleteTeam,

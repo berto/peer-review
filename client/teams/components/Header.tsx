@@ -4,6 +4,7 @@ import NameInput from './NameInput';
 
 interface HeaderProps {
   addTeam: (name:string)=> any;
+  getCohorts: (token:string)=> any;
 };
 
 interface HeaderSectionState {
@@ -26,6 +27,11 @@ class Header extends React.Component<HeaderProps, HeaderSectionState> {
     this.setState({ addNew: !this.state.addNew })
   }
 
+  getCohorts() {
+    let token = localStorage.getItem('user_token'); 
+    this.props.getCohorts(token);
+  }
+
   render() {
     let element;
     if (this.state.addNew) {
@@ -44,6 +50,10 @@ class Header extends React.Component<HeaderProps, HeaderSectionState> {
           className="pure-button button-secondary"
           onClick={this.toggleNewTeamForm.bind(this)} > 
           Add New Team </button>
+        <button 
+          className="pure-button button-secondary" 
+          onClick={this.getCohorts.bind(this)}> 
+          Import Team </button>
         {element}
       </header>
     );

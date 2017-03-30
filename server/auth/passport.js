@@ -16,7 +16,8 @@ function verifyCallback(accessToken, refreshToken, profile, done) {
       'Authorization': 'Bearer ' + accessToken
     }
   };
-  request(process.env.USER_INFO_URL, options, function (error, response, body) {
+  var url = process.env.MEMBERS_URL + "api/v3/me";
+  request(url, options, function (error, response, body) {
     if (!error && response.statusCode == 200) {
       var userInfo = JSON.parse(body).results[0];
       userInfo.accessToken = accessToken;

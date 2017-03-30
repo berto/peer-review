@@ -5,6 +5,7 @@ import initialState from '../main/initialState';
 
 import {
   GET_TEAMS,
+  GET_COHORTS,
   SET_TEAM,
   ADD_TEAM,
   DELETE_TEAM,
@@ -14,6 +15,11 @@ import {
 export default handleActions<State, Teams>({
   [GET_TEAMS]: (state: Teams, action: Action<Team[]>): Teams => {
     return {list: action.payload, selected: state.selected};
+  },
+
+  [GET_COHORTS]: (state: Teams, action: Action<Team[]>) => {
+    console.log(action.payload);
+    return state
   },
 
   [SET_TEAM]: (state: Teams, action: Action<Team>): Teams => {

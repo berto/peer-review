@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var teams = require('./api/teams');
 var members = require('./api/members');
 var surveys = require('./api/surveys');
+var cohorts = require('./api/cohorts');
 var auth = require('./auth');
 
 module.exports = function(options) {
@@ -38,6 +39,7 @@ module.exports = function(options) {
   app.use('/api/team', teams);
   app.use('/api/member', members);
   app.use('/api/survey', surveys);
+  app.use('/api/cohort', cohorts);
 
   app.get("/*", function(req, res) {
     renderer.render(
