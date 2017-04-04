@@ -10,8 +10,8 @@ import {
 export default handleActions<State, Form>({
 
   [SUBMIT_FEEDBACK]: (state: Form): Form => {
-    state.submitted = true;
-    return state;
+    const form = {submitted: true};
+    return form;
   }
 
 }, initialState);

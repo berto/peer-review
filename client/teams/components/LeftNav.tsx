@@ -6,12 +6,14 @@ import MainSection from './MainSection';
 
 interface LeftNavProps {
   teams: Team[];
+  cohorts: any[];
   team: Team;
   addTeam: (text:string)=> void;
   getTeamMembers: (team:Team)=>void;
   getTeamSurveys: (team:Team)=>void;
   setTeam: (team:Team)=>void;
   getTeams: () => void;
+  toggleCohorts: (show:boolean) => void;
   getCohorts: (token:string)=> any;
   editTeam: (team:Team, text:string)=>void;
   deleteTeam: (team:Team)=> void;
@@ -29,14 +31,16 @@ class LeftNav extends React.Component<LeftNavProps, void> {
     return (
       <section className="left-nav pure-u">
         <Header 
+          cohorts={this.props.cohorts}
           addTeam={this.props.addTeam}
+          toggleCohorts={this.props.toggleCohorts}
           getCohorts={this.props.getCohorts}/>
         <MainSection
           teams={this.props.teams}
           team={this.props.team}
           getTeamMembers={this.props.getTeamMembers}
           getTeamSurveys={this.props.getTeamSurveys}
-          getTeams={this.props.getTeams}
+          toggleCohorts={this.props.toggleCohorts}
           setTeam={this.props.setTeam}
           editTeam={this.props.editTeam}
           deleteTeam={this.props.deleteTeam}/>

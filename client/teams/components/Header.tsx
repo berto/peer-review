@@ -3,18 +3,24 @@ import * as React from 'react';
 import NameInput from './NameInput';
 
 interface HeaderProps {
+  cohorts: any[];
   addTeam: (name:string)=> any;
   getCohorts: (token:string)=> any;
+  toggleCohorts: (show:boolean)=> any;
 };
 
 interface HeaderSectionState {
   addNew: boolean;
+  loading: boolean;
 };
 
 class Header extends React.Component<HeaderProps, HeaderSectionState> {
   constructor(props, conname) {
     super(props, conname);
-    this.state = {addNew: false};
+    this.state = {
+      addNew: false,
+      loading: false
+    };
   }
 
   handleSave(name: string) {
@@ -24,16 +30,24 @@ class Header extends React.Component<HeaderProps, HeaderSectionState> {
   }
 
   toggleNewTeamForm() {
-    this.setState({ addNew: !this.state.addNew })
+    this.state.addNew = !this.state.addNew;
+    this.setState(this.state);
   }
 
   getCohorts() {
     let token = localStorage.getItem('user_token'); 
-    this.props.getCohorts(token);
+    if (!this.props.cohorts.length) {
+      this.props.getCohorts(token);
+      this.state.loading = true;
+      this.setState(this.state);
+    } else {
+      this.props.toggleCohorts(true);
+    }
   }
 
   render() {
     let element;
+    let importButtonText = 'Import Team';
     if (this.state.addNew) {
       element = ( 
         <NameInput
@@ -43,17 +57,21 @@ class Header extends React.Component<HeaderProps, HeaderSectionState> {
         />
       )
     }
+    console.log(this.props.cohorts);
+    if (this.state.loading && !this.props.cohorts.length) {
+      importButtonText = "Loading...";
+    }
     return (
       <header className="header pure-form pure-form-stacked">
         <h1> Peer Review </h1>
         <button 
+          className="pure-button button-secondary" 
+          onClick={this.getCohorts.bind(this)}> 
+          {importButtonText} </button>
+        <button 
           className="pure-button button-secondary"
           onClick={this.toggleNewTeamForm.bind(this)} > 
           Add New Team </button>
-        <button 
-          className="pure-button button-secondary" 
-          onClick={this.getCohorts.bind(this)}> 
-          Import Team </button>
         {element}
       </header>
     );

@@ -15,6 +15,7 @@ export type Survey = {
 
 export interface State {
   teams: Teams;
+  cohorts: Cohorts;
   members: Members;
   surveys: Surveys;
   feedback: Feedback;
@@ -29,6 +30,11 @@ export interface Members {
 export interface Feedback {
   rating: number;
   text: string[];
+}
+
+export interface Cohorts {
+  list: any[];
+  show: boolean;
 }
 
 export interface Form {

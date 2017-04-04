@@ -4,6 +4,7 @@ import axios from 'axios';
 import { 
   GET_TEAMS, 
   GET_COHORTS, 
+  TOGGLE_COHORTS, 
   SET_TEAM, 
   ADD_TEAM, 
   EDIT_TEAM, 
@@ -18,13 +19,16 @@ const getTeams = () => {
   }
 };
 
-const getCohorts = token => {
+const getCohorts = (token: string) => {
   return dispatch => {
     axios.get('/api/cohort/', {headers: { 'Authorization': `Bearer ${token}` }}).then(result => {
-      console.log(result);
-      dispatch({ type: GET_COHORTS, payload: result})
+      dispatch({ type: GET_COHORTS, payload: result.data})
     })
   }
+};
+
+const toggleCohorts = (show:boolean) => {
+  return {type: TOGGLE_COHORTS, payload: show};
 };
 
 const setTeam = (team: Team) => {
@@ -60,6 +64,7 @@ const editTeam = (team: Team, name: string) => {
 export const actions = {
   getTeams,
   getCohorts,
+  toggleCohorts,
   addTeam,
   setTeam,
   deleteTeam,

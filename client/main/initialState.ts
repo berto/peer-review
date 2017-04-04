@@ -2,6 +2,7 @@ import { State } from './model';
 
 const initialState: State = {
   teams: {list: [], selected: null}, 
+  cohorts: {list: [], show: false}, 
   surveys: {list: [], selected: null},
   members: {list: [], selected: null},
   feedback: {text: [], rating: 0},

@@ -1,8 +1,10 @@
 export { default as LeftNav } from './components/LeftNav';
+export { default as Cohort } from './components/Cohort';
 export { default as TeamInfo } from './components/TeamInfo';
 export { default as TeamName } from './components/TeamName';
 export { default as NameInput } from './components/NameInput';
+export { default as cohorts } from './cohortReducer';
 import { actions } from './actions';
 export { actions };
-import reducer from './reducer';
+import reducer from './teamReducer';
 export default reducer;

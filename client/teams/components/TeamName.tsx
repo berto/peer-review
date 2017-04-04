@@ -7,6 +7,7 @@ interface NameProps {
   team: Team;
   getTeamMembers: (team:Team)=>void;
   getTeamSurveys: (team:Team)=>void;
+  toggleCohorts: (show:boolean)=>void;
   editTeam: (team:Team, name:string)=>void;
   setTeam: (team:Team)=>void;
   deleteTeam: (team:Team)=>void;
@@ -39,6 +40,7 @@ class TeamName extends React.Component<NameProps, NameState> {
   handleClick() {
     this.props.getTeamMembers(this.props.team);
     this.props.getTeamSurveys(this.props.team);
+    this.props.toggleCohorts(false);
     this.props.setTeam(this.props.team);
   }
 

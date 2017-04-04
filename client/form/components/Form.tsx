@@ -12,7 +12,6 @@ interface FormProps {
 };
 
 interface FormState {
-  submitted: boolean;
   feedback: MemberFeedback[];
 };
 
@@ -20,7 +19,6 @@ class Form extends React.Component<FormProps, FormState> {
   constructor (props, context) {
     super(props, context);
     this.state = {
-      submitted: false,
       feedback: [{id: 0, member_id: null, name: "", text: "", rating: null}] 
     };
   }
@@ -42,8 +40,6 @@ class Form extends React.Component<FormProps, FormState> {
   }
 
   handleSubmit () {
-    this.state.submitted = true;
-    this.setState(this.state);
     this.props.submitFeedback(this.props.survey_id, this.state.feedback);
   }
 
@@ -56,7 +52,7 @@ class Form extends React.Component<FormProps, FormState> {
         </div>
       </section>
     )
-    if (!this.state.submitted) {
+    if (!this.props.form.submitted) {
       form = (
         <div>
           <section className="form">

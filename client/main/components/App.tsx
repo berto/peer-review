@@ -2,12 +2,13 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as React from 'react';
 import actions from '../action';
-import {Team, Member, Members, Surveys, Feedback, Teams} from '../model';
+import {Team, Member, Cohorts, Members, Surveys, Feedback, Teams} from '../model';
 
-import { LeftNav, TeamInfo } from '../../teams'; 
+import { LeftNav, TeamInfo, Cohort } from '../../teams'; 
 import { Feedback as FeedbackInfo } from '../../feedback'; 
 interface AppProps {
   teams: Teams;
+  cohorts: Cohorts;
   members: Members;
   surveys: Surveys;
   feedback: Feedback;
@@ -22,9 +23,24 @@ class App extends React.Component<AppProps, void> {
     }
   }
   render() {
-    const { actions, teams, members, surveys, feedback } = this.props;
+    const { actions, teams, cohorts, members, surveys, feedback } = this.props;
     let team, feedbackInfo;
-    if (teams.selected) {
+    if (cohorts.show) {
+      team = (
+        <section className="pure-u team">
+          <header>
+            <h1> Galvanize Cohorts </h1>
+          </header>
+          <ul className="pure-menu-list cohorts">
+            {cohorts.list.map((cohort,i) => 
+              <Cohort 
+                key={i} 
+                cohort={cohort}/>
+            )}
+          </ul>
+        </section>
+      )
+    } else if (teams.selected) {
       team = (
         <TeamInfo 
           team={teams.selected}
@@ -60,10 +76,12 @@ class App extends React.Component<AppProps, void> {
           addTeam={actions.addTeam}
           team={teams.selected}
           teams={teams.list}
+          cohorts={cohorts.list}
           getTeamMembers={actions.getTeamMembers}
           getTeamSurveys={actions.getTeamSurveys}
           getTeams={actions.getTeams}
           getCohorts={actions.getCohorts}
+          toggleCohorts={actions.toggleCohorts}
           setTeam={actions.setTeam}
           editTeam={actions.editTeam}
           deleteTeam={actions.deleteTeam}/>
@@ -76,6 +94,7 @@ class App extends React.Component<AppProps, void> {
 
 const mapStateToProps = state => ({
   teams: state.teams,
+  cohorts: state.cohorts,
   members: state.members,
   surveys: state.surveys,
   feedback: state.feedback,
