@@ -57,7 +57,6 @@ class Header extends React.Component<HeaderProps, HeaderSectionState> {
         />
       )
     }
-    console.log(this.props.cohorts);
     if (this.state.loading && !this.props.cohorts.length) {
       importButtonText = "Loading...";
     }

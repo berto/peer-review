@@ -35,6 +35,10 @@ class App extends React.Component<AppProps, void> {
             {cohorts.list.map((cohort,i) => 
               <Cohort 
                 key={i} 
+                addCohort={actions.addCohort}
+                getTeams={actions.getTeams}
+                setTeam={actions.setTeam}
+                toggleCohorts={actions.toggleCohorts}
                 cohort={cohort}/>
             )}
           </ul>

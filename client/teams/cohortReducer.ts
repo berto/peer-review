@@ -4,6 +4,7 @@ import initialState from '../main/initialState';
 
 import {
   GET_COHORTS,
+  ADD_COHORT,
   TOGGLE_COHORTS
 } from './constants/ActionTypes';
 

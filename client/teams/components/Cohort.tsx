@@ -1,6 +1,11 @@
 import * as React from 'react';
+import { Team } from '../../main/model';
 
 interface CohortProps {
+  addCohort: (token:string, url:string)=> Team;
+  setTeam: (team:Team)=>void;
+  getTeams: ()=> any;
+  toggleCohorts: (show:boolean) => void;
   cohort: any;
   key?: any;
 };
@@ -8,7 +13,8 @@ interface CohortProps {
 class Cohort extends React.Component<CohortProps, void> {
 
   handleClick() {
-    console.log("clicked", this.props.cohort.url);
+    let token = localStorage.getItem('user_token'); 
+    let team = this.props.addCohort(token, this.props.cohort.url);
   }
 
   render() {
