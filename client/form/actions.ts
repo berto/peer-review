@@ -1,5 +1,5 @@
 import { Team, Survey, MemberFeedback } from '../main/model';
-import axios from 'axios';
+import axios from '../main/axios';
 
 import { 
   SUBMIT_FEEDBACK

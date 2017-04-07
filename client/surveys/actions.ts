@@ -1,5 +1,5 @@
 import { Team, Survey } from '../main/model';
-import axios from 'axios';
+import axios from '../main/axios';
 
 import { 
   GET_TEAM_SURVEYS, 

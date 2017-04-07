@@ -14,7 +14,7 @@ interface LeftNavProps {
   setTeam: (team:Team)=>void;
   getTeams: () => void;
   toggleCohorts: (show:boolean) => void;
-  getCohorts: (token:string)=> any;
+  getCohorts: ()=> any;
   editTeam: (team:Team, text:string)=>void;
   deleteTeam: (team:Team)=> void;
 };

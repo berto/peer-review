@@ -1,5 +1,5 @@
 import { Member, Survey } from '../main/model';
-import axios from 'axios';
+import axios from '../main/axios';
 
 import { 
   GET_MEMBER_FEEDBACK, 

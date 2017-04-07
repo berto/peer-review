@@ -1,5 +1,5 @@
 import { Team } from '../main/model';
-import axios from 'axios';
+import axios from '../main/axios';
 
 import { 
   GET_TEAMS, 
@@ -24,21 +24,23 @@ const getTeams = () => {
   return dispatch => {
     axios.get('/api/team/').then(result => {
       dispatch({ type: GET_TEAMS, payload: result.data})
-    })
+    }).catch(error => {
+      window.location.href = '/login';
+    });
   }
 };
 
-const getCohorts = (token: string) => {
+const getCohorts = () => {
   return dispatch => {
-    axios.get('/api/cohort/', {headers: { 'Authorization': `Bearer ${token}` }}).then(result => {
+    axios.get('/api/cohort/').then(result => {
       dispatch({ type: GET_COHORTS, payload: result.data});
     })
   }
 };
 
-const addCohort = (token: string, url: string) => {
+const addCohort = (url: string) => {
   return dispatch => {
-    axios.post('/api/cohort/', {url}, {headers: { 'Authorization': `Bearer ${token}` }}).then(teamResult => {
+    axios.post('/api/cohort/', {url}).then(teamResult => {
       axios.get('/api/team/').then(result => {
         dispatch({ type: GET_TEAMS, payload: result.data});
       }).then(() => {

@@ -5,7 +5,7 @@ import NameInput from './NameInput';
 interface HeaderProps {
   cohorts: any[];
   addTeam: (name:string)=> any;
-  getCohorts: (token:string)=> any;
+  getCohorts: ()=> any;
   toggleCohorts: (show:boolean)=> any;
 };
 
@@ -35,9 +35,8 @@ class Header extends React.Component<HeaderProps, HeaderSectionState> {
   }
 
   getCohorts() {
-    let token = localStorage.getItem('user_token'); 
     if (!this.props.cohorts.length) {
-      this.props.getCohorts(token);
+      this.props.getCohorts();
       this.state.loading = true;
       this.setState(this.state);
     } else {

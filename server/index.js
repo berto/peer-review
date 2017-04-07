@@ -8,7 +8,9 @@ var teams = require('./api/teams');
 var members = require('./api/members');
 var surveys = require('./api/surveys');
 var cohorts = require('./api/cohorts');
-var auth = require('./auth');
+var auth = require('./auth').router;
+var authenticate = require('./auth').authenticate;
+var validate = require('./auth').validate;
 
 module.exports = function(options) {
   var Renderer = require("../config/SimpleRenderer.js");
@@ -36,6 +38,7 @@ module.exports = function(options) {
   app.use(bodyParser.urlencoded({ extended: false }));
 
   app.use('/auth', auth);
+  app.use('/api/*', validate, authenticate);
   app.use('/api/team', teams);
   app.use('/api/member', members);
   app.use('/api/survey', surveys);
@@ -55,6 +58,11 @@ module.exports = function(options) {
         res.end(html);
       }
     );
+  });
+
+  app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    res.send('error');
   });
 
   var server = http.createServer(app);
