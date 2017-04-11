@@ -7,7 +7,13 @@ class Loading extends React.Component<void, void> {
     if (token) {
       localStorage.setItem('user_token', token);
     }
-    window.location.href = '/'; 
+    let path = '/';
+    let survey_id = localStorage.getItem('survey_id');
+    if (survey_id) {
+      localStorage.removeItem('survey_id');
+      path = `/survey/${survey_id}`; 
+    }
+    window.location.href = path;
   }
   render() {
     return (

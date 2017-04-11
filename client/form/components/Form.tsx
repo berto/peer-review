@@ -1,12 +1,14 @@
 import * as React from 'react';
 import FeedbackForm from './FeedbackForm';
 
-import { Members, MemberFeedback, Form as FormType } from '../../main/model';
+import { Members, Survey, MemberFeedback, Form as FormType } from '../../main/model';
 
 interface FormProps {
   survey_id: string;
   members: Members;
+  survey: Survey;
   form: FormType;
+  getSurvey: (survey_id:string)=> void;
   getSurveyMembers: (survey_id:string)=> void;
   submitFeedback: (survey_id:string, feedback:MemberFeedback[])=> void;
 };
@@ -25,6 +27,7 @@ class Form extends React.Component<FormProps, FormState> {
 
   componentWillMount() {
     this.props.getSurveyMembers(this.props.survey_id);
+    this.props.getSurvey(this.props.survey_id);
   }
 
   handleAddPeer (i) {
@@ -53,10 +56,15 @@ class Form extends React.Component<FormProps, FormState> {
       </section>
     )
     if (!this.props.form.submitted) {
+      let name = this.props.survey ? this.props.survey.name : "";
       form = (
         <div>
           <section className="form">
-            <h1> Peer Review </h1>
+            <h1> Peer Review - {name} </h1>
+            <main>
+              <p>Not anonymous, but only viewed by instructors unless permission is given to share.</p>
+              <p>Please add a feedback for each peer by clicking the "Add Peer" button.</p>
+            </main>
             <div className="feedbacks">
               {this.state.feedback.map((_,i) => 
               <FeedbackForm 

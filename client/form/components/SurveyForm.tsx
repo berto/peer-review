@@ -9,19 +9,23 @@ import { Params, Teams, Surveys, Feedback, Members, Form as FeedbackForm } from 
 interface SurveyFormProps {
   params: Params;
   members: Members;
+  surveys: Surveys;
   form: FeedbackForm;
   actions: any;
 };
 
 class SurveyForm extends React.Component<SurveyFormProps, void> {
   render() {
+    console.log(this.props)
     return (
       <div className="form-page">
         <Form
           members={this.props.members}
           form={this.props.form}
           survey_id={this.props.params.id}
+          survey={this.props.surveys.selected}
           getSurveyMembers={this.props.actions.getSurveyMembers}
+          getSurvey={this.props.actions.getSurvey}
           submitFeedback={this.props.actions.submitFeedback}/>
       </div>
     );
@@ -30,6 +34,7 @@ class SurveyForm extends React.Component<SurveyFormProps, void> {
 
 const mapStateToProps = state => ({
   members: state.members,
+  surveys: state.surveys,
   form: state.form
 });
 

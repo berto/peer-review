@@ -44,6 +44,8 @@ export interface Form {
 export interface MemberFeedback {
   id: number;
   name: string;
+  contribution: number;
+  futureTeammate: string;
   member_id: string;
   rating: number;
   text: string;

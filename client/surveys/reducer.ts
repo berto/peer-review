@@ -7,6 +7,7 @@ import {
   GET_TEAM_SURVEYS,
   ADD_SURVEY,
   SET_SURVEY,
+  GET_SURVEY,
   DELETE_SURVEY,
   EDIT_SURVEY
 } from './constants/ActionTypes';
@@ -14,6 +15,10 @@ import {
 export default handleActions<State, Survey>({
   [GET_TEAM_SURVEYS]: (state: Surveys, action: Action<Survey[]>): Surveys => {
     return {selected: null, list: action.payload};
+  },
+
+  [GET_SURVEY]: (state: Surveys, action: Action<Survey>): Surveys => {
+    return {list: state.list, selected: action.payload};
   },
 
   [SET_SURVEY]: (state: Surveys, action: Action<Survey>): Surveys => {

@@ -4,6 +4,7 @@ import axios from '../main/axios';
 import { 
   GET_TEAM_SURVEYS, 
   ADD_SURVEY, 
+  GET_SURVEY, 
   SET_SURVEY, 
   EDIT_SURVEY, 
   DELETE_SURVEY 
@@ -13,6 +14,14 @@ const getTeamSurveys = (team: Team) => {
   return dispatch => {
     axios.get(`/api/team/${team.id}/survey/`).then(result => {
       dispatch({ type: GET_TEAM_SURVEYS, payload: result.data})
+    })
+  }
+};
+
+const getSurvey = (id: string) => {
+  return dispatch => {
+    axios.get(`/api/survey/${id}`).then(result => {
+      dispatch({ type: GET_SURVEY, payload: result.data})
     })
   }
 };
@@ -51,6 +60,7 @@ export const actions = {
   getTeamSurveys,
   addSurvey,
   setSurvey,
+  getSurvey,
   deleteSurvey,
   editSurvey
 }

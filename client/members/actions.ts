@@ -22,7 +22,11 @@ const getSurveyMembers = (survey_id: number) => {
   return dispatch => {
     axios.get(`/api/survey/${survey_id}/member/`).then(result => {
       dispatch({ type: GET_SURVEY_MEMBERS, payload: result.data})
-    })
+    }).catch(error => {
+      let survey_id = window.location.pathname.split('/')[2];
+      localStorage.setItem('survey_id', survey_id);
+      window.location.href = '/login';
+    });
   }
 };
 
