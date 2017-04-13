@@ -21,7 +21,7 @@ class Form extends React.Component<FormProps, FormState> {
   constructor (props, context) {
     super(props, context);
     this.state = {
-      feedback: [{id: 0, member_id: null, name: "", text: "", rating: null}] 
+      feedback: [{id: 0, member_id: null, name: "", text: "", contribution: 0, futureTeammate: null, rating: null}] 
     };
   }
 
@@ -31,7 +31,7 @@ class Form extends React.Component<FormProps, FormState> {
   }
 
   handleAddPeer (i) {
-    this.state.feedback.push({id: this.state.feedback.length, member_id: null, name: "", text: "", rating: null});
+    this.state.feedback.push({id: this.state.feedback.length, member_id: null, contribution: 0, futureTeammate: null, name: "", text: "", rating: null});
     this.setState(this.state);
   }
 
@@ -42,6 +42,13 @@ class Form extends React.Component<FormProps, FormState> {
     this.setState(this.state);
   }
 
+  remove (index) {
+    if (this.state.feedback.length > 1) {
+      this.state.feedback.splice(index, 1);
+      this.setState(this.state);
+    }
+  }
+
   handleSubmit () {
     this.props.submitFeedback(this.props.survey_id, this.state.feedback);
   }
@@ -50,8 +57,8 @@ class Form extends React.Component<FormProps, FormState> {
     let form = (
       <section className="submitted">
         <h1> Submitted </h1>
-        <div className="image">
-          <img src={require("../../assets/dance.gif")} />
+        <div className="emoji">
+            🎉 
         </div>
       </section>
     )
@@ -66,11 +73,14 @@ class Form extends React.Component<FormProps, FormState> {
               <p>Please add a feedback for each peer by clicking the "Add Peer" button.</p>
             </main>
             <div className="feedbacks">
-              {this.state.feedback.map((_,i) => 
+              {this.state.feedback.map((feedback, i) => 
               <FeedbackForm 
                 key={i}
                 id={i}
+                close={this.state.feedback.length !== 1 && i === this.state.feedback.length - 1}
+                feedback={feedback}
                 update={this.handleUpdate.bind(this)}
+                remove={this.remove.bind(this)}
                 members={this.props.members} />
               )}
               <button onClick={this.handleAddPeer.bind(this)} className="pure-button button-primary"> Add Peer </button>

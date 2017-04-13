@@ -39,9 +39,9 @@ module.exports = function(options) {
 
   app.use('/auth', auth);
   app.use('/api/survey', surveys);
+  app.use('/api/member', members);
   app.use('/api/*', validate, authenticate);
   app.use('/api/team', teams);
-  app.use('/api/member', members);
   app.use('/api/cohort', cohorts);
 
   app.get("/*", function(req, res) {

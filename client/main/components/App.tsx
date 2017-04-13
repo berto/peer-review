@@ -64,13 +64,15 @@ class App extends React.Component<AppProps, void> {
       )
     } else {
       team = (
-        <p className="ghost"> 👻 </p>
+        <p className="emoji"> 👻 </p>
       ) 
     }
     if (members.selected) {
+      console.log(members.selected, surveys.selected);
       feedbackInfo = (
         <FeedbackInfo
           survey={surveys.selected}
+          member={members.selected}
           feedback={feedback}/>
       )
     }

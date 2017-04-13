@@ -54,6 +54,8 @@ router.get('/:id/member/:member_id/feedback', function(req, res, next) {
  * @apiParam {Number} survey_id  ID of Survey.
  * @apiParam {Number} member_id  ID of Member.
  * @apiParam {String} feedback  Member Feedback.
+ * @apiParam {String} contribution  Member Contribution Level.
+ * @apiParam {String} futureTeammate  Member As A Future Teammate.
  * @apiParam {Number} score  Member Score Rating.
  */
 router.post('/:id/feedback', function(req, res, next) {
@@ -62,7 +64,9 @@ router.post('/:id/feedback', function(req, res, next) {
       survey_id: req.params.id,
       member_id: feedback.member_id,
       feedback: feedback.text,
-      score: feedback.rating + 1
+      score: feedback.rating + 1,
+      contribution: feedback.contribution,
+      futureTeammate: feedback.futureTeammate
     });
   });
   Promise.all(feedbacks).then(function (result) {

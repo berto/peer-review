@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as classNames from 'classnames'; 
 import { Survey, Member } from '../../main/model';
 import NameInput from './NameInput';
-import { Link } from 'react-router'
+import { Link } from 'react-router';
 
 interface NameProps {
   survey: Survey;

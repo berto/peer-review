@@ -4,6 +4,9 @@ import { Members, MemberFeedback } from '../../main/model';
 
 interface FeedbackFormProps {
   id: number;
+  close: boolean;
+  remove: (id: number) => void; 
+  feedback: MemberFeedback; 
   update: (feedback: MemberFeedback) => void; 
   members: Members;
 };
@@ -22,13 +25,13 @@ class FeedbackForm extends React.Component<FeedbackFormProps, FeedbackFormState>
   constructor (props, context) {
     super(props, context);
     this.state = {
-      rating: null,
-      tempRating: null,
-      futureTeammate: null,
-      currentName: "Pick a Name",
-      contribution: 0,
-      memberId: null,
-      text: ""
+      rating: this.props.feedback.rating,
+      tempRating: 0,
+      currentName: this.props.feedback.name || "Pick A Name",
+      futureTeammate: this.props.feedback.futureTeammate,
+      contribution: this.props.feedback.contribution,
+      memberId: this.props.feedback.member_id,
+      text: this.props.feedback.text
     };
   }
 
@@ -89,6 +92,10 @@ class FeedbackForm extends React.Component<FeedbackFormProps, FeedbackFormState>
     this.handleUpdate();
   }
 
+  remove() {
+    this.props.remove(this.props.id)
+  }
+
   refs: {
     text: any;
   }
@@ -112,8 +119,16 @@ class FeedbackForm extends React.Component<FeedbackFormProps, FeedbackFormState>
       );
     }
 
+    let close;
+    if (this.props.close) {
+      close = (
+        <i className="material-icons warning hand right" onClick={this.remove.bind(this)}> close </i>
+      )
+    }
+
     return (
       <div className="member-feedback pure-form">
+        <h4> Name: </h4>
         <div className="dropdown">
           <span> {this.state.currentName} </span>
           <ul>
@@ -123,8 +138,9 @@ class FeedbackForm extends React.Component<FeedbackFormProps, FeedbackFormState>
           </ul>
         </div>
         <div className="star-box">
-          Overall Performance: {stars}
+          <h4>Overall Performance:</h4> {stars}
         </div>
+        {close}
         <p>How much did this teammate contribute?</p>
         <label className="pure-radio">
           <input 

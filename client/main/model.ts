@@ -27,8 +27,16 @@ export interface Members {
   selected: Member;
 }
 
+export interface FutureTeammate {
+  No: number;
+  Indifferent: number;
+  Yes: number;
+}
+
 export interface Feedback {
   rating: number;
+  contribution: number;
+  futureTeammate: FutureTeammate;
   text: string[];
 }
 

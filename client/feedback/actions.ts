@@ -9,10 +9,16 @@ const format = (feedbacks) => {
   return feedbacks.reduce((result, feedback, i) => {
     result.text = result.text || [];  
     result.rating = result.rating || 0;  
+    result.contribution = result.contribution || 0;  
+    let defaultFutureTeammate = { "No": 0, "Yes": 0, "Indifferent": 0 };
+    result.futureTeammate = result.futureTeammate || defaultFutureTeammate;
     result.text.push(feedback.feedback);
     result.rating += feedback.score;
+    result.contribution += feedback.contribution;
+    result.futureTeammate[feedback.futureTeammate]++
     if (i == feedbacks.length -1) {
       result.rating /= feedbacks.length;  
+      result.contribution /= feedbacks.length;  
     } 
     return result;
   }, {});

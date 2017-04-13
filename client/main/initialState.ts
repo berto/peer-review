@@ -5,7 +5,7 @@ const initialState: State = {
   cohorts: {list: [], show: false}, 
   surveys: {list: [], selected: null},
   members: {list: [], selected: null},
-  feedback: {text: [], rating: 0},
+  feedback: {text: [], contribution: 0, futureTeammate: null, rating: 0},
   form: {submitted: false}
 };
 

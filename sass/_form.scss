@@ -6,14 +6,20 @@
   box-sizing: border-box;
 }
 
+.more-info {
+  margin-top: 1em;
+  margin-right: 1em;
+}
+
 .center {
   margin: 0 auto;
-  width: 50vw;
+  width: 70vw;
 }
 
 .submit {
   @extend .center;
   button {
+    margin-top: 0;
     width: auto;
   }
 }
@@ -23,7 +29,7 @@
   border-radius: 20px;
   color: $black;
   padding: 1em;
-  height: 85vh;
+  height: 87vh;
   box-sizing: border-box;
   background: $white;
   h1 {
@@ -37,9 +43,8 @@
 
 .submitted {
   @extend .form;
-  .image {
-    width: 100%;
-    text-align: center;
+  .emoji {
+    height: 80%;
   }
 }
 
@@ -56,10 +61,15 @@ textarea {
 .member-feedback {
   margin-top: 1em;
   padding: 0.5em;
+  padding-right: 1em;
+  h4 {
+    display: inline;
+    padding-right: 0.5em;
+  }
 }
 
 .feedbacks {
-  height: 70%;
+  height: 75%;
   overflow: scroll;
 }
 
