@@ -66,7 +66,7 @@ router.post('/:id/feedback', function(req, res, next) {
       feedback: feedback.text,
       score: feedback.rating + 1,
       contribution: feedback.contribution,
-      futureTeammate: feedback.futureTeammate
+      future_teammate: feedback.futureTeammate
     });
   });
   Promise.all(feedbacks).then(function (result) {

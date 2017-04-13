@@ -15,7 +15,7 @@ const format = (feedbacks) => {
     result.text.push(feedback.feedback);
     result.rating += feedback.score;
     result.contribution += feedback.contribution;
-    result.futureTeammate[feedback.futureTeammate]++
+    result.futureTeammate[feedback.future_teammate]++
     if (i == feedbacks.length -1) {
       result.rating /= feedbacks.length;  
       result.contribution /= feedbacks.length;  

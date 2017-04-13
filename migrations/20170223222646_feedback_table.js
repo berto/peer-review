@@ -4,7 +4,7 @@ exports.up = function(knex, Promise) {
     table.uuid('id').notNullable().primary();
     table.integer('score');
     table.text('feedback');
-    table.text('futureTeammate');
+    table.text('future_teammate');
     table.integer('contribution');
     table.text('galvanize_id');
     table.uuid('survey_id').references('id').inTable('survey').onDelete('CASCADE');

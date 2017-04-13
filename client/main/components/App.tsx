@@ -67,8 +67,7 @@ class App extends React.Component<AppProps, void> {
         <p className="emoji"> 👻 </p>
       ) 
     }
-    if (members.selected) {
-      console.log(members.selected, surveys.selected);
+    if (members.selected && !cohorts.show) {
       feedbackInfo = (
         <FeedbackInfo
           survey={surveys.selected}

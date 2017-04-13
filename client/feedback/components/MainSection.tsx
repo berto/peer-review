@@ -15,7 +15,10 @@ class MainSection extends React.Component<MainSectionProps, void> {
     let contributionScale = ["Too Little", "Good Amount", "Too Much"];
     let rating = this.props.rating ? this.props.rating.toFixed(2) : 0;
     let contribution = this.props.contribution ? contributionScale[Math.round(this.props.contribution)] : "Not Scored";
-    let feedback, No, Yes, Indifferent;
+    let feedback : JSX.Element[] = [<p key="0">No Feedback Available</p>];
+    let No : number = 0;
+    let Indifferent : number = 0;
+    let Yes : number = 0;
     if (this.props.futureTeammate) {
       No = this.props.futureTeammate.No;
       Yes = this.props.futureTeammate.Yes;
