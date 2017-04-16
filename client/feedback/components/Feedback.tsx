@@ -12,9 +12,10 @@ interface FeedbackProps {
 
 class Feedback extends React.Component<FeedbackProps, void> {
   render() {
-    let url: string = `/api/member/${this.props.member.id}/feedback/`;
+    let token: string = localStorage.getItem('user_token');
+    let url: string = `/api/member/${this.props.member.id}/feedback/?token=${token}`;
     if (this.props.survey) {
-      url = `/api/survey/${this.props.survey.id}/member/${this.props.member.id}/feedback`;
+      url = `/api/survey/${this.props.survey.id}/member/${this.props.member.id}/feedback?token=${token}`;
     }
     return (
       <section className="feedback pure-u">

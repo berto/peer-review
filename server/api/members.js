@@ -2,6 +2,10 @@ var express = require('express');
 var router = express.Router();
 var Member = require('../../db/queries/members');
 var Feedback = require('../../db/queries/feedbacks');
+var getUser = require('./helper').getUser;
+var getUsersById = require('./helper').getUsersById;
+var matchUserById = require('./helper').matchUserById;
+var jwt = require('jsonwebtoken');
 
 /**
  * @api {get} /member Request Member Information
@@ -31,8 +35,16 @@ router.get('/:id', function(req, res, next) {
  * @apiGroup Member
  */
 router.get('/:id/feedback', function(req, res, next) {
-  Feedback.memberList(req.params.id).then(function (feedback) {
-    res.json(feedback);
+  Feedback.memberList(req.params.id).then(function (feedbacks) {
+    if (req.query.token) {
+      var info = jwt.decode(req.query.token);
+      getUsersById(feedbacks, info.accessToken).then(function(userList) {
+        matchUserById(feedbacks, userList);
+        res.json(feedbacks);
+      });
+    } else {
+      res.json(feedbacks);
+    }
   });
 });
 

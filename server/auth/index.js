@@ -34,6 +34,7 @@ function validate(req, res, next) {
       if (err) {
         next(error);
       } else {
+        req.userId = decoded.id;
         next();
       }
     });
@@ -45,7 +46,6 @@ function validate(req, res, next) {
 function authenticate(req, res, next) {
   var authorization = req.get('Authorization');
   var token = authorization.substring(7);
-  var info = jwt.decode(token);
   var error = new Error("Unauthorized");
   error.status = 401;
   var isAdmin = jwt.decode(token).companies.some(function (companies) {

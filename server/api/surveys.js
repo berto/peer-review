@@ -2,6 +2,11 @@ var express = require('express');
 var router = express.Router();
 var Survey = require('../../db/queries/surveys');
 var Feedback = require('../../db/queries/feedbacks');
+var validate = require('../auth').validate;
+var getUser = require('./helper').getUser;
+var getUsersById = require('./helper').getUsersById;
+var matchUserById = require('./helper').matchUserById;
+var jwt = require('jsonwebtoken');
 
 /**
  * @api {get} /survey Request Survey Information
@@ -42,8 +47,16 @@ router.get('/:id/member', function(req, res, next) {
  * @apiGroup Survey
  */
 router.get('/:id/member/:member_id/feedback', function(req, res, next) {
-  Feedback.surveyRead(req.params.id, req.params.member_id).then(function (feedback) {
-    res.json(feedback);
+  Feedback.surveyRead(req.params.id, req.params.member_id).then(function (feedbacks) {
+    if (req.query.token) {
+      var info = jwt.decode(req.query.token);
+      getUsersById(feedbacks, info.accessToken).then(function(userList) {
+        matchUserById(feedbacks, userList);
+        res.json(feedbacks);
+      });
+    } else {
+      res.json(feedbacks);
+    }
   });
 });
 
@@ -58,9 +71,10 @@ router.get('/:id/member/:member_id/feedback', function(req, res, next) {
  * @apiParam {String} futureTeammate  Member As A Future Teammate.
  * @apiParam {Number} score  Member Score Rating.
  */
-router.post('/:id/feedback', function(req, res, next) {
+router.post('/:id/feedback', validate, function(req, res, next) {
   var feedbacks = req.body.map(function (feedback) {
     return Feedback.create({
+      galvanize_id: req.userId,
       survey_id: req.params.id,
       member_id: feedback.member_id,
       feedback: feedback.text,
