@@ -38,9 +38,10 @@ module.exports = function(options) {
   app.use(bodyParser.urlencoded({ extended: false }));
 
   app.use('/auth', auth);
+  app.use('/api/*', validate);
   app.use('/api/survey', surveys);
   app.use('/api/member', members);
-  app.use('/api/*', validate, authenticate);
+  app.use('/api/*', authenticate);
   app.use('/api/team', teams);
   app.use('/api/cohort', cohorts);
 

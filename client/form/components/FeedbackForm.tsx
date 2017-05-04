@@ -145,21 +145,21 @@ class FeedbackForm extends React.Component<FeedbackFormProps, FeedbackFormState>
         <label className="pure-radio">
           <input 
             type="radio" 
-            name="contribution" 
+            name={`constribution${this.props.id}`} 
             onChange={this.handleContributionOption.bind(this, 0)}/>
           &nbsp;Too Little
         </label>
         <label className="pure-radio">
           <input 
             type="radio" 
-            name="contribution" 
+            name={`constribution${this.props.id}`} 
             onChange={this.handleContributionOption.bind(this, 1)}/>
           &nbsp;Good Amount
         </label>
         <label className="pure-radio">
           <input 
             type="radio" 
-            name="contribution" 
+            name={`constribution${this.props.id}`} 
             onChange={this.handleContributionOption.bind(this, 2)}/>
           &nbsp;Too Much
         </label>
@@ -167,21 +167,21 @@ class FeedbackForm extends React.Component<FeedbackFormProps, FeedbackFormState>
         <label className="pure-radio">
           <input 
             type="radio" 
-            name="future" 
+            name={`future${this.props.id}`} 
             onChange={this.handleFutureTeammateOption.bind(this, "No")}/>
           &nbsp;No
         </label>
         <label className="pure-radio">
           <input 
             type="radio" 
-            name="future" 
+            name={`future${this.props.id}`} 
             onChange={this.handleFutureTeammateOption.bind(this, "Indifferent")}/>
           &nbsp;Indifferent 
         </label>
         <label className="pure-radio">
           <input 
             type="radio" 
-            name="future" 
+            name={`future${this.props.id}`} 
             onChange={this.handleFutureTeammateOption.bind(this, "Yes")}/>
           &nbsp;Yes
         </label>

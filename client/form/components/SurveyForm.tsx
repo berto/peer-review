@@ -16,7 +16,6 @@ interface SurveyFormProps {
 
 class SurveyForm extends React.Component<SurveyFormProps, void> {
   render() {
-    console.log(this.props)
     return (
       <div className="form-page">
         <Form
